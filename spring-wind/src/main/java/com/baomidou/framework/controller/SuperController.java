@@ -21,7 +21,7 @@ import com.baomidou.kisso.SSOToken;
 
 /**
  * <p>
- * Controller 基础类
+ * Controller 基础类（支持 kisso）
  * </p>
  * 
  * @author hubin

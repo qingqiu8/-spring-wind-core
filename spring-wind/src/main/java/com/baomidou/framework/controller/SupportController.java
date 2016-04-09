@@ -29,7 +29,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 
 /**
  * <p>
- * 抽象 Controller 基础类
+ * Controller 基础类
  * </p>
  * 
  * @author hubin
