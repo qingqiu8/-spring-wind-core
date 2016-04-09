@@ -24,7 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.baomidou.kisso.common.util.HttpUtil;
 import com.baomidou.mybatisplus.plugins.Page;
 
 /**
@@ -85,20 +84,6 @@ public class SupportController {
 		StringBuffer rto = new StringBuffer("redirect:");
 		rto.append(url);
 		return rto.toString();
-	}
-
-	/**
-	 * 是否为 post 请求
-	 */
-	protected boolean isPost() {
-		return HttpUtil.isPost(request);
-	}
-
-	/**
-	 * 是否为 get 请求
-	 */
-	protected boolean isGet() {
-		return HttpUtil.isGet(request);
 	}
 
 	/**

@@ -18,6 +18,7 @@ package com.baomidou.framework.controller;
 import com.baomidou.framework.exception.WebException;
 import com.baomidou.kisso.SSOHelper;
 import com.baomidou.kisso.SSOToken;
+import com.baomidou.kisso.common.util.HttpUtil;
 
 /**
  * <p>
@@ -47,4 +48,17 @@ public class SuperController extends SupportController {
 		return tk;
 	}
 
+	/**
+	 * 是否为 post 请求
+	 */
+	protected boolean isPost() {
+		return HttpUtil.isPost(request);
+	}
+
+	/**
+	 * 是否为 get 请求
+	 */
+	protected boolean isGet() {
+		return HttpUtil.isGet(request);
+	}
 }
