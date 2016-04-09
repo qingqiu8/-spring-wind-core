@@ -4,13 +4,20 @@
 
 package com.baomidou.framework.upload.cos;
 
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 /**
- * A filter for easy semi-automatic handling of multipart/form-data requests 
- * (file uploads).  The filter capability requires Servlet API 2.3.
+ * A filter for easy semi-automatic handling of multipart/form-data requests
+ * (file uploads). The filter capability requires Servlet API 2.3.
  * <p>
  * See Jason Hunter's June 2001 article in JavaWorld for a full explanation of
  * the class usage.
@@ -20,46 +27,41 @@ import javax.servlet.http.*;
  */
 public class MultipartFilter implements Filter {
 
-  private FilterConfig config = null;
-  private String dir = null;
+	private FilterConfig config = null;
+	private String dir = null;
 
-  public void init(FilterConfig config) throws ServletException {
-    this.config = config;
+	public void init(FilterConfig config) throws ServletException {
+		this.config = config;
 
-    // Determine the upload directory.  First look for an uploadDir filter
-    // init parameter.  Then look for the context tempdir.
-    dir = config.getInitParameter("uploadDir");
-    if (dir == null) {
-      File tempdir = (File) config.getServletContext()
-                  .getAttribute("javax.servlet.context.tempdir");
-      if (tempdir != null) {
-        dir = tempdir.toString();
-      }
-      else {
-        throw new ServletException(
-          "MultipartFilter: No upload directory found: set an uploadDir " +
-          "init parameter or ensure the javax.servlet.context.tempdir " +
-          "directory is valid");
-      }
-    }
-  }
+		// Determine the upload directory. First look for an uploadDir filter
+		// init parameter. Then look for the context tempdir.
+		dir = config.getInitParameter("uploadDir");
+		if (dir == null) {
+			File tempdir = (File) config.getServletContext().getAttribute("javax.servlet.context.tempdir");
+			if (tempdir != null) {
+				dir = tempdir.toString();
+			} else {
+				throw new ServletException("MultipartFilter: No upload directory found: set an uploadDir "
+						+ "init parameter or ensure the javax.servlet.context.tempdir " + "directory is valid");
+			}
+		}
+	}
 
-  public void destroy() {
-    config = null;
-  }
+	public void destroy() {
+		config = null;
+	}
 
-  public void doFilter(ServletRequest request, ServletResponse response,
-                     FilterChain chain) throws IOException, ServletException {
-    HttpServletRequest req = (HttpServletRequest) request;
-    String type = req.getHeader("Content-Type");
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+		HttpServletRequest req = (HttpServletRequest) request;
+		String type = req.getHeader("Content-Type");
 
-    // If this is not a multipart/form-data request continue
-    if (type == null || !type.startsWith("multipart/form-data")) {
-      chain.doFilter(request, response);
-    }
-    else {
-      MultipartWrapper multi = new MultipartWrapper(req, dir);
-      chain.doFilter(multi, response);
-    }
-  }
+		// If this is not a multipart/form-data request continue
+		if (type == null || !type.startsWith("multipart/form-data")) {
+			chain.doFilter(request, response);
+		} else {
+			MultipartWrapper multi = new MultipartWrapper(req, dir);
+			chain.doFilter(multi, response);
+		}
+	}
 }

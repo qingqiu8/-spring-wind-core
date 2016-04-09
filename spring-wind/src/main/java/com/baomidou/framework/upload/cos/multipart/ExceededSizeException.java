@@ -6,7 +6,7 @@ package com.baomidou.framework.upload.cos.multipart;
 
 import java.io.IOException;
 
-/** 
+/**
  * Thrown to indicate an upload exceeded the maximum size.
  *
  * @see com.baomidou.framework.upload.cos.multipart.MultipartParser
@@ -16,20 +16,22 @@ import java.io.IOException;
  */
 public class ExceededSizeException extends IOException {
 
-  /**
-   * Constructs a new ExceededSizeException with no detail message.
-   */
-  public ExceededSizeException() {
-    super();
-  }
+	private static final long serialVersionUID = 1L;
 
-  /**
-   * Constructs a new ExceededSizeException with the specified
-   * detail message.
-   *
-   * @param s the detail message
-   */
-  public ExceededSizeException(String s) {
-    super(s);
-  }
+	/**
+	 * Constructs a new ExceededSizeException with no detail message.
+	 */
+	public ExceededSizeException() {
+		super();
+	}
+
+	/**
+	 * Constructs a new ExceededSizeException with the specified detail message.
+	 *
+	 * @param s
+	 *            the detail message
+	 */
+	public ExceededSizeException(String s) {
+		super(s);
+	}
 }

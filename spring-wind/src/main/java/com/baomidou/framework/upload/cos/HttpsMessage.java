@@ -48,101 +48,101 @@
 
 package com.baomidou.framework.upload.cos;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
-import java.security.Security;
+import java.net.URL;
+import java.net.URLStreamHandlerFactory;
 import java.security.Provider;
+import java.security.Security;
 
 /**
- * A class to simplify HTTP/HTTPS client-server communication.	It abstracts
- * the communication into messages, which can be either GET or POST.
+ * A class to simplify HTTP/HTTPS client-server communication. It abstracts the
+ * communication into messages, which can be either GET or POST.
  * <p>
- * It can be used like this:
- * <blockquote><pre>
- * &nbsp;
+ * It can be used like this: <blockquote>
+ * 
+ * <pre>
+ * 
  * HttpsMessage msg = new HttpsMessage("https://[some server]");
- * &nbsp;
+ * 
  * Properties props = new Properties();
  * props.put("name", "value");
- * &nbsp;
+ * 
  * InputStream in = msg.sendGetMessage(props);
- * </pre></blockquote>
- * This class extends the HttpMessage class
- * written by Jason Hunter at servlets.com.
- * The HttpMessage class can be found in the com.oreilly.servlet
- * package found at www.servlets.com
+ * </pre>
+ * 
+ * </blockquote> This class extends the HttpMessage class written by Jason
+ * Hunter at servlets.com. The HttpMessage class can be found in the
+ * com.oreilly.servlet package found at www.servlets.com
  * <p>
- * For information see http://www.javaworld.com/javatips/jw-javatip96.html
- * Note this class works with JDK 1.2 or later only.
+ * For information see http://www.javaworld.com/javatips/jw-javatip96.html Note
+ * this class works with JDK 1.2 or later only.
  * <p>
+ * 
  * @author <b>Matt Towers</b>
  * @author Copyright &#169; 2000
  * @version 1.0, 2000/05/05
  */
-public class HttpsMessage extends com.baomidou.framework.upload.cos.HttpMessage
-{
+public class HttpsMessage extends com.baomidou.framework.upload.cos.HttpMessage {
 
-  //A flag to indicate weather or not the stream handler has been set
-  static boolean m_bStreamHandlerSet = false;
+	// A flag to indicate weather or not the stream handler has been set
+	static boolean m_bStreamHandlerSet = false;
 
-  /**
-   * Constructs a new HttpsMessage that can be used to communicate with the 
-   * servlet at the specified URL using HTTPS.
-   *
-   * @param szURL the server resource (typically a servlet) with which 
-   * to communicate
-   */
-  public HttpsMessage(String szURL) throws Exception
-  {
-	super(null);
-	//If the stream handler has already been set
-	//there is no need to do anything
-	if( !m_bStreamHandlerSet )
-	{
-		String szVendor = System.getProperty("java.vendor");
-		String szVersion = System.getProperty("java.version");
-		//Assumes a system version string of the form [major].[minor].[release]  (eg. 1.2.2)
-		Double dVersion = new Double(szVersion.substring(0, 3));
+	/**
+	 * Constructs a new HttpsMessage that can be used to communicate with the
+	 * servlet at the specified URL using HTTPS.
+	 *
+	 * @param szURL
+	 *            the server resource (typically a servlet) with which to
+	 *            communicate
+	 */
+	public HttpsMessage(String szURL) throws Exception {
+		super(null);
+		// If the stream handler has already been set
+		// there is no need to do anything
+		if (!m_bStreamHandlerSet) {
+			String szVendor = System.getProperty("java.vendor");
+			String szVersion = System.getProperty("java.version");
+			// Assumes a system version string of the form
+			// [major].[minor].[release] (eg. 1.2.2)
+			Double dVersion = new Double(szVersion.substring(0, 3));
 
-		//Otherwise, if we are running in a MS environment, use the MS stream handler.
-		if( -1 < szVendor.indexOf("Microsoft") )
-		{
-    		try
-    		{
-    			Class clsFactory = Class.forName("com.ms.net.wininet.WininetStreamHandlerFactory" );
-				if ( null != clsFactory)
-					URL.setURLStreamHandlerFactory((URLStreamHandlerFactory)clsFactory.newInstance());
+			// Otherwise, if we are running in a MS environment, use the MS
+			// stream handler.
+			if (-1 < szVendor.indexOf("Microsoft")) {
+				try {
+					Class clsFactory = Class.forName("com.ms.net.wininet.WininetStreamHandlerFactory");
+					if (null != clsFactory)
+						URL.setURLStreamHandlerFactory((URLStreamHandlerFactory) clsFactory.newInstance());
+				} catch (ClassNotFoundException cfe) {
+					throw new Exception(
+							"Unable to load the Microsoft SSL stream handler.  Check classpath." + cfe.toString());
+				}
+				// If the stream handler factory has already been successfuly
+				// set
+				// make sure our flag is set and eat the error
+				catch (Error err) {
+					m_bStreamHandlerSet = true;
+				}
 			}
-			catch( ClassNotFoundException cfe )
-			{
-				throw new Exception("Unable to load the Microsoft SSL stream handler.  Check classpath."  + cfe.toString());
-			}			
-			//If the stream handler factory has already been successfuly set
-			//make sure our flag is set and eat the error
-			catch( Error err ){m_bStreamHandlerSet = true;}
+			// If we are in a normal Java environment, try to use the JSSE
+			// handler.
+			else if (1.2 <= dVersion.doubleValue()) {
+				System.getProperties().put("java.protocol.handler.pkgs", "com.sun.net.ssl.internal.www.protocol");
+				try {
+					// if we have the JSSE provider available, and it has not
+					// already been
+					// set, add it as a new provide to the Security class.
+					Class clsFactory = Class.forName("com.sun.net.ssl.internal.ssl.Provider");
+					if ((null != clsFactory) && (null == Security.getProvider("SunJSSE")))
+						Security.addProvider((Provider) clsFactory.newInstance());
+				} catch (ClassNotFoundException cfe) {
+					throw new Exception(
+							"Unable to load the JSSE SSL stream handler.  Check classpath." + cfe.toString());
+				}
+			}
+
+			m_bStreamHandlerSet = true;
 		}
-		//If we are in a normal Java environment, try to use the JSSE handler.
-		else if( 1.2 <= dVersion.doubleValue() )
-		{
-			System.getProperties().put("java.protocol.handler.pkgs", "com.sun.net.ssl.internal.www.protocol"); 
-			try
-			{
-				//if we have the JSSE provider available, and it has not already been
-				//set, add it as a new provide to the Security class.
-				Class clsFactory = Class.forName("com.sun.net.ssl.internal.ssl.Provider");
-				if( (null != clsFactory) && (null == Security.getProvider("SunJSSE")) )
-						Security.addProvider((Provider)clsFactory.newInstance());
-			}
-			catch( ClassNotFoundException cfe )
-			{
-				throw new Exception("Unable to load the JSSE SSL stream handler.  Check classpath."  + cfe.toString());
-			}
-		}
-										
-		m_bStreamHandlerSet = true;
+
+		super.servlet = new URL(szURL);
 	}
-	
-	super.servlet = new URL(szURL);
-  }
 }

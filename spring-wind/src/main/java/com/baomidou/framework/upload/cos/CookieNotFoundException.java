@@ -4,7 +4,7 @@
 
 package com.baomidou.framework.upload.cos;
 
-/** 
+/**
  * Thrown to indicate a cookie does not exist.
  *
  * @see com.baomidou.framework.upload.cos.CookieParser
@@ -14,20 +14,23 @@ package com.baomidou.framework.upload.cos;
  */
 public class CookieNotFoundException extends Exception {
 
-  /**
-   * Constructs a new CookieNotFoundException with no detail message.
-   */
-  public CookieNotFoundException() {
-    super();
-  }
+	private static final long serialVersionUID = 1L;
 
-  /**
-   * Constructs a new CookieNotFoundException with the specified
-   * detail message.
-   *
-   * @param s the detail message
-   */
-  public CookieNotFoundException(String s) {
-    super(s);
-  }
+	/**
+	 * Constructs a new CookieNotFoundException with no detail message.
+	 */
+	public CookieNotFoundException() {
+		super();
+	}
+
+	/**
+	 * Constructs a new CookieNotFoundException with the specified detail
+	 * message.
+	 *
+	 * @param s
+	 *            the detail message
+	 */
+	public CookieNotFoundException(String s) {
+		super(s);
+	}
 }

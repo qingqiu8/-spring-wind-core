@@ -4,7 +4,7 @@
 
 package com.baomidou.framework.upload.cos;
 
-/** 
+/**
  * Thrown to indicate a parameter does not exist.
  *
  * @see com.baomidou.framework.upload.cos.ParameterParser
@@ -14,20 +14,23 @@ package com.baomidou.framework.upload.cos;
  */
 public class ParameterNotFoundException extends Exception {
 
-  /**
-   * Constructs a new ParameterNotFoundException with no detail message.
-   */
-  public ParameterNotFoundException() {
-    super();
-  }
+	private static final long serialVersionUID = 1L;
 
-  /**
-   * Constructs a new ParameterNotFoundException with the specified
-   * detail message.
-   *
-   * @param s the detail message
-   */
-  public ParameterNotFoundException(String s) {
-    super(s);
-  }
+	/**
+	 * Constructs a new ParameterNotFoundException with no detail message.
+	 */
+	public ParameterNotFoundException() {
+		super();
+	}
+
+	/**
+	 * Constructs a new ParameterNotFoundException with the specified detail
+	 * message.
+	 *
+	 * @param s
+	 *            the detail message
+	 */
+	public ParameterNotFoundException(String s) {
+		super(s);
+	}
 }
