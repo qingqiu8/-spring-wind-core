@@ -1,6 +1,6 @@
-#spring-wind 春风
+![spring-wind](http://git.oschina.net/uploads/images/2016/0410/215020_e10c575a_12260.png "SSM架构核心库")
 
-SSM 框架，带给您的只有惊喜！
+SSM 架构核心库，带给您的只有惊喜！
 
 ------------------------------------------------
 《春风》
