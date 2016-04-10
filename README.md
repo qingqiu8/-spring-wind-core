@@ -1,4 +1,4 @@
-![spring-wind](http://git.oschina.net/uploads/images/2016/0410/215020_e10c575a_12260.png "SSM架构核心库")
+![spring-wind](http://git.oschina.net/uploads/images/2016/0410/215321_0c4657f5_12260.png "SSM架构核心库")
 
 SSM 架构核心库，带给您的只有惊喜！
 
