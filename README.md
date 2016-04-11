@@ -20,11 +20,11 @@ SSM 架构核心库，带给您的只有惊喜！
 
 
 
-Futures
+Features
 ====================
 1、欢迎提出更好的意见，帮助完善 Spring-Wind 
 
-copyright
+Copyright
 ====================
 Apache License, Version 2.0
 
