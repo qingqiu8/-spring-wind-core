@@ -120,8 +120,31 @@
 	<profiles>
 		<profile>
 			<id>release</id>
+
+			<properties>
+				<maven.compiler.source>1.6</maven.compiler.source>
+				<maven.compiler.target>1.6</maven.compiler.target>
+				<maven.compiler.compilerVersion>1.6</maven.compiler.compilerVersion>
+				<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+			</properties>
+			
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<jdk>${maven.compiler.compilerVersion}</jdk>
+			</activation>
+
 			<build>
 				<plugins>
+					<!-- Compile -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<source>${maven.compiler.source}</source>
+							<target>${maven.compiler.target}</target>
+							<encoding>${maven.compiler.encoding}</encoding>
+						</configuration>
+					</plugin>
 					<!-- Source -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
