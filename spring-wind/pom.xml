@@ -41,7 +41,7 @@
 		<mybatis-plus.version>1.2.10</mybatis-plus.version>
 		
 		<!-- kisso -->
-		<kisso.version>3.6.4</kisso.version>
+		<kisso.version>3.6.5</kisso.version>
 		<bcprov.version>1.50</bcprov.version>
 		<fastjson.version>1.2.8</fastjson.version>
 		
