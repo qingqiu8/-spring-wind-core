@@ -36,11 +36,17 @@
 		<aspectjweaver.version>1.8.9</aspectjweaver.version>
 		<servlet-api.version>2.5</servlet-api.version>
 		<velocity.version>1.7</velocity.version>
-		<mail.version>1.4.7</mail.version>
-		<kisso.version>3.6.4</kisso.version>
-		<mybatis-plus.version>1.2.10</mybatis-plus.version>
-		<fastjson.version>1.2.8</fastjson.version>
 		<slf4j.version>1.7.21</slf4j.version>
+		<mail.version>1.4.7</mail.version>
+		<mybatis-plus.version>1.2.10</mybatis-plus.version>
+		
+		<!-- kisso -->
+		<kisso.version>3.6.4</kisso.version>
+		<bcprov.version>1.50</bcprov.version>
+		<fastjson.version>1.2.8</fastjson.version>
+		
+		<!-- cache -->
+		<jedis.version>2.8.1</jedis.version>
 	</properties>
 
 	<dependencies>
@@ -94,12 +100,23 @@
 			<version>${mail.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- kisso begin -->
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>kisso</artifactId>
 			<version>${kisso.version}</version>
-			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk14</artifactId>
+			<version>${bcprov.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
+		<!-- kisso end -->
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus</artifactId>
@@ -115,11 +132,14 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
+		<!-- cache begin -->
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
-			<version>2.7.3</version>
+			<version>${jedis.version}</version>
+			<scope>provided</scope>
 		</dependency>
+		<!-- cache end -->
 	</dependencies>
 
 	<profiles>

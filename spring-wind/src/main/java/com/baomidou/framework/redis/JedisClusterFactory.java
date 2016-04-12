@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -20,7 +19,7 @@ import redis.clients.jedis.JedisCluster;
  */
 public class JedisClusterFactory implements FactoryBean<JedisCluster>, InitializingBean {
 
-	private GenericObjectPoolConfig genericObjectPoolConfig;
+//	private GenericObjectPoolConfig genericObjectPoolConfig;
 	private JedisCluster jedisCluster;
 	private int connectionTimeout = 2000;
 	private int soTimeout = 3000;
@@ -40,8 +39,8 @@ public class JedisClusterFactory implements FactoryBean<JedisCluster>, Initializ
 			}
 			haps.add(new HostAndPort(arr[0], Integer.valueOf(arr[1])));
 		}
-		jedisCluster = new JedisCluster(haps, connectionTimeout,maxRedirections
-				, genericObjectPoolConfig);
+//		jedisCluster = new JedisCluster(haps, connectionTimeout,maxRedirections
+//				, genericObjectPoolConfig);
 	}
 
 	public JedisCluster getObject() throws Exception {
@@ -56,13 +55,13 @@ public class JedisClusterFactory implements FactoryBean<JedisCluster>, Initializ
 		return true;
 	}
 
-	public GenericObjectPoolConfig getGenericObjectPoolConfig() {
-		return genericObjectPoolConfig;
-	}
-
-	public void setGenericObjectPoolConfig(GenericObjectPoolConfig genericObjectPoolConfig) {
-		this.genericObjectPoolConfig = genericObjectPoolConfig;
-	}
+//	public GenericObjectPoolConfig getGenericObjectPoolConfig() {
+//		return genericObjectPoolConfig;
+//	}
+//
+//	public void setGenericObjectPoolConfig(GenericObjectPoolConfig genericObjectPoolConfig) {
+//		this.genericObjectPoolConfig = genericObjectPoolConfig;
+//	}
 
 	public JedisCluster getJedisCluster() {
 		return jedisCluster;
