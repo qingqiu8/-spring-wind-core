@@ -1,7 +1,3 @@
-/*
- * 北京递蓝科软件技术有限公司版权所有，保留所有权利。
- */
-
 package com.baomidou.framework.quartz;
 
 import org.apache.commons.logging.Log;
