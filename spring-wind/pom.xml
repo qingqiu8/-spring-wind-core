@@ -39,14 +39,17 @@
 		<slf4j.version>1.7.21</slf4j.version>
 		<mail.version>1.4.7</mail.version>
 		<mybatis-plus.version>1.2.10</mybatis-plus.version>
-		
+
 		<!-- kisso -->
 		<kisso.version>3.6.5</kisso.version>
 		<bcprov.version>1.50</bcprov.version>
 		<fastjson.version>1.2.8</fastjson.version>
-		
+
 		<!-- cache -->
 		<jedis.version>2.8.1</jedis.version>
+
+		<!-- scheduler -->
+		<quartz.version>2.2.2</quartz.version>
 	</properties>
 
 	<dependencies>
@@ -140,6 +143,13 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- cache end -->
+		<!-- scheduler begin -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>${quartz.version}</version>
+        </dependency>
+		<!-- scheduler end -->
 	</dependencies>
 
 	<profiles>
@@ -152,7 +162,7 @@
 				<maven.compiler.compilerVersion>1.6</maven.compiler.compilerVersion>
 				<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 			</properties>
-			
+
 			<activation>
 				<activeByDefault>true</activeByDefault>
 				<jdk>${maven.compiler.compilerVersion}</jdk>

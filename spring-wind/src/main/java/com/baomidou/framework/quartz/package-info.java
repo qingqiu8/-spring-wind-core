@@ -1,4 +1,9 @@
-/**
- * Created by Janeluo on 2016/4/12 0012.
- */
 package com.baomidou.framework.quartz;
+
+/**
+ *
+ * Quartz 相关辅助类
+ *
+ * @author yyn_0210@sina.com
+ *
+ */
