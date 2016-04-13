@@ -50,6 +50,9 @@
 
 		<!-- scheduler -->
 		<quartz.version>2.2.2</quartz.version>
+
+		<!-- pinyin4j -->
+		<pinyin4j.version>2.5.1</pinyin4j.version>
 	</properties>
 
 	<dependencies>
@@ -126,11 +129,6 @@
 			<version>${mybatis-plus.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>${fastjson.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
@@ -143,14 +141,24 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- cache end -->
+		
 		<!-- scheduler begin -->
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
-            <version>${quartz.version}</version>
-            <scope>provided</scope>
-        </dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>${quartz.version}</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- scheduler end -->
+
+		<!-- pinyin4j begin -->
+		<dependency>
+			<groupId>com.belerweb</groupId>
+			<artifactId>pinyin4j</artifactId>
+			<version>${pinyin4j.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- pinyin4j end -->
 	</dependencies>
 
 	<profiles>
