@@ -40,11 +40,10 @@ import org.springframework.stereotype.Service;
  * <p>
  * QuartzJob 管理器
  * </p>
- * 
+ *
  * @author yyn_0210@sina.com
  * @Date 2016-04-13
  */
-@Service
 public class QuartzJobManager {
     private final static String JOB_GROUP_NAME = "job_group";
     private final static String TRIGGER_GROUP_NAME = "trigger_group";
