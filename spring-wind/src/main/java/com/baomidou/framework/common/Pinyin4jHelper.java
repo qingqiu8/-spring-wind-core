@@ -35,17 +35,34 @@ import java.util.Map;
  * @Date 2016-04-12
  */
 public class Pinyin4jHelper {
-
+	
 	/**
 	 * <p>
-	 * 汉字转换位汉语拼音首字母，英文字符不变，特殊字符丢失 支持多音字。 （长沙市长:cssc,zssz,zssc,cssz）
+	 * 拼音首字母，获取第一个结果。 （北京市长:bjsz,bjsc 返回 bjsz）
 	 * </p>
 	 * 
 	 * @param chines
 	 *            	汉字
-	 * @return 拼音
+	 * @return 拼音首字母
 	 */
 	public static String converterToFirstSpell( String chines ) {
+		String pinyin = converterToAllFirstSpell(chines);
+		if ( pinyin != null && pinyin.contains(",") ) {
+			return pinyin.split(",")[0];
+		}
+		return pinyin;
+	}
+
+	/**
+	 * <p>
+	 * 汉字转换位汉语拼音首字母，英文字符不变，特殊字符丢失 支持多音字。 （北京市长:bjsz,bjsc）
+	 * </p>
+	 * 
+	 * @param chines
+	 *            	汉字
+	 * @return 拼音首字母
+	 */
+	public static String converterToAllFirstSpell( String chines ) {
 		StringBuffer pinyinName = new StringBuffer();
 		char[] nameChar = chines.toCharArray();
 		HanyuPinyinOutputFormat defaultFormat = new HanyuPinyinOutputFormat();
@@ -76,12 +93,9 @@ public class Pinyin4jHelper {
 		return parseTheChineseByObject(discountTheChinese(pinyinName.toString()));
 	}
 
-
 	/**
 	 * <p>
-	 * 汉字转换位汉语全拼，英文字符不变，特殊字符丢失
-	 * 支持多音字，生成方式如（重当参:zhongdangcen,zhongdangcan,chongdangcen
-	 * ,chongdangshen,zhongdangshen,chongdangcan）
+	 * 汉语全拼，获取第一个结果。（北京市长:beijingshizhang,beijingshichang 返回 beijingshizhang）
 	 * </p>
 	 *
 	 * @param chines
@@ -89,6 +103,24 @@ public class Pinyin4jHelper {
 	 * @return 拼音
 	 */
 	public static String converterToSpell( String chines ) {
+		String pinyin = converterToAllSpell(chines);
+		if ( pinyin != null && pinyin.contains(",") ) {
+			return pinyin.split(",")[0];
+		}
+		return pinyin;
+	}
+
+	/**
+	 * <p>
+	 * 汉字转换位汉语全拼，英文字符不变，特殊字符丢失
+	 * 支持多音字，生成方式如（北京市长:beijingshizhang,beijingshichang）
+	 * </p>
+	 *
+	 * @param chines
+	 *            	汉字
+	 * @return 拼音
+	 */
+	public static String converterToAllSpell( String chines ) {
 		StringBuffer pinyinName = new StringBuffer();
 		char[] nameChar = chines.toCharArray();
 		HanyuPinyinOutputFormat defaultFormat = new HanyuPinyinOutputFormat();

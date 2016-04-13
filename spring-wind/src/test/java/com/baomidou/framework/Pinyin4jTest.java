@@ -32,12 +32,12 @@ public class Pinyin4jTest {
 		System.out.println("需要转换的字符串: " + str);
 
 		//只取首字母
-		String result = Pinyin4jHelper.converterToFirstSpell(str);
-		System.out.println("只取首字母:" + result);
+		System.out.println("所有首字母:" + Pinyin4jHelper.converterToAllFirstSpell(str));
+		System.out.println("第一个结果首字母:" + Pinyin4jHelper.converterToFirstSpell(str));
 
 		//全拼
-		result = Pinyin4jHelper.converterToSpell(str);
-		System.out.println("全拼:" + result);
+		System.out.println("所有全拼:" + Pinyin4jHelper.converterToAllSpell(str));
+		System.out.println("第一个结果全拼:" + Pinyin4jHelper.converterToSpell(str));
 	}
 
 }
