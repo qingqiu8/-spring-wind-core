@@ -47,8 +47,6 @@
 
 		<!-- cache -->
 		<guava.version>19.0</guava.version>
-		<spring-data-redis.version>1.7.1.RELEASE</spring-data-redis.version>
-		<jedis.version>2.8.1</jedis.version>
 
 		<!-- scheduler -->
 		<quartz.version>2.2.2</quartz.version>
@@ -140,18 +138,6 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>${guava.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-		    <groupId>org.springframework.data</groupId>
-		    <artifactId>spring-data-redis</artifactId>
-		    <version>${spring-data-redis.version}</version>
-		    <scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>redis.clients</groupId>
-			<artifactId>jedis</artifactId>
-			<version>${jedis.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- cache end -->
