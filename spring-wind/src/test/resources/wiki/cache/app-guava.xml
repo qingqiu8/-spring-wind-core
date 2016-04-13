@@ -12,10 +12,10 @@
     <!-- 启用缓存注解功能，这个是必须的，否则注解不会生效，另外，该注解一定要声明在spring主配置文件中才会生效 -->
 	<cache:annotation-driven cache-manager="cacheManager"
 		key-generator="myKeyGenerator" />
-    
+
     <!-- 自定义key生成器 -->
 	<bean id="myKeyGenerator" class="com.baomidou.framework.cache.MyKeyGenerator" />
-    
+
     <!-- spring自带的cache管理器 -->
 	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
 		<property name="caches">
@@ -64,53 +64,4 @@
 		<property name="expireAfterWriteInSeconds" value="3600" /><!-- 缓存时间：以秒为单位 -->
 	</bean>
     
-    
-    <!-- redis缓存1分钟 -->
-	<bean id="redisCache1"
-		class="com.baomidou.framework.cache.redis.RedisCacheFactoryBean">
-		<property name="name" value="redisCache60seconds" /><!-- 缓存名称 -->
-		<property name="liveTime" value="60" /><!-- 缓存时间：以秒为单位 -->
-		<property name="redisTemplate" ref="redisTemplate" /><!-- 缓存实现 -->
-	</bean>
-    
-    <!-- redis缓存10分钟 -->
-	<bean id="redisCache2"
-		class="com.baomidou.framework.cache.redis.RedisCacheFactoryBean">
-		<property name="name" value="redisCache10minutes" /><!-- 缓存名称 -->
-		<property name="liveTime" value="600" /><!-- 缓存时间 ：以秒为单位-->
-		<property name="redisTemplate" ref="redisTemplate" /><!-- 缓存实现 -->
-	</bean>
-    
-   	<!-- redis缓存1小时-->
-	<bean id="redisCache3"
-		class="com.baomidou.framework.cache.redis.RedisCacheFactoryBean">
-		<property name="name" value="redisCache1hour" /><!-- 缓存名称 -->
-		<property name="liveTime" value="3600" /><!-- 缓存时间 ：以秒为单位-->
-		<property name="redisTemplate" ref="redisTemplate" /><!-- 缓存实现 -->
-	</bean>
-
-    <!-- redis 相关配置 -->
-	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-		<property name="maxTotal" value="${redis.maxTotal}" />
-		<property name="maxIdle" value="${redis.maxIdle}" />
-		<property name="maxWaitMillis" value="${redis.maxWait}" />
-		<property name="testOnBorrow" value="${redis.testOnBorrow}" /><!-- 向调用者输出“链接”资源时，是否检测是有有效，如果无效则从连接池中移除，并尝试获取继续获取。设为true，一个挂都不能用 -->
-		<property name="testOnReturn" value="${redis.testOnReturn}" /><!-- 向连接池“归还”链接时，是否检测“链接”对象的有效性。 -->
-	</bean>
-
-	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
-		<constructor-arg index="0" ref="jedisPoolConfig" />
-		<constructor-arg index="1" value="${redis.master.hostname}" />
-		<constructor-arg index="2" value="${redis.master.port}" />
-	</bean>
-
-	<bean id="connectionFactory"
-		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-		p:host-name="${redis.master.hostname}" p:port="${redis.master.port}"
-		p:pool-config-ref="jedisPoolConfig" />
-
-	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
-		<property name="connectionFactory" ref="connectionFactory" />
-	</bean>
-
 </beans>

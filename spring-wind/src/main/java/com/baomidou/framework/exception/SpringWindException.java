@@ -13,27 +13,30 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.baomidou.framework.cache.redis;
-
-import org.springframework.data.redis.cache.RedisCache;
-import org.springframework.data.redis.core.RedisOperations;
+package com.baomidou.framework.exception;
 
 /**
  * <p>
- * Redis 缓存处理工厂类
+ * SpringWind 异常类
  * </p>
  * 
  * @author hubin
- * @Date 2016-04-13
+ * @Date 2016-01-23
  */
-public class RedisCacheFactoryBean extends RedisCache {
+public class SpringWindException extends RuntimeException {
 
-	public RedisCacheFactoryBean(
-			String name,
-			byte[] prefix,
-			RedisOperations<? extends Object, ? extends Object> redisOperations,
-			long expiration ) {
-		super(name, prefix, redisOperations, expiration);
+	private static final long serialVersionUID = 1L;
+
+	public SpringWindException(String message) {
+		super(message);
+	}
+
+	public SpringWindException(Throwable throwable) {
+		super(throwable);
+	}
+
+	public SpringWindException(String message, Throwable throwable) {
+		super(message, throwable);
 	}
 
 }

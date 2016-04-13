@@ -16,10 +16,14 @@
 package com.baomidou.framework.cache.guava;
 
 import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.cache.guava.GuavaCache;
 import org.springframework.util.StringUtils;
+
+import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
 /**
@@ -77,7 +81,7 @@ public class GuavaCacheFactoryBean implements FactoryBean<GuavaCache>, BeanNameA
 			builder.expireAfterWrite(expireAfterWriteInSeconds, TimeUnit.SECONDS);
 		}
 
-		com.google.common.cache.Cache<Object, Object> guavaCache = builder.build();
+		Cache<Object, Object> guavaCache = builder.build();
 		this.cache = new GuavaCache(this.name, guavaCache, this.allowNullValues);
 	}
 

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 启用缓存注解功能，这个是必须的，否则注解不会生效，另外，该注解一定要声明在spring主配置文件中才会生效 -->
+	<cache:annotation-driven cache-manager="cacheManager"
+		key-generator="myKeyGenerator" />
+
+    <!-- 自定义key生成器 -->
+	<bean id="myKeyGenerator" class="com.baomidou.framework.cache.MyKeyGenerator" />
+
+    <!-- redis缓存1分钟 -->
+	<bean id="redisCache1"
+		class="com.baomidou.framework.cache.redis.RedisCacheFactoryBean">
+		<property name="name" value="redisCache60seconds" /><!-- 缓存名称 -->
+		<property name="liveTime" value="60" /><!-- 缓存时间：以秒为单位 -->
+		<property name="redisTemplate" ref="redisTemplate" /><!-- 缓存实现 -->
+	</bean>
+
+    <!-- redis缓存10分钟 -->
+	<bean id="redisCache2"
+		class="com.baomidou.framework.cache.redis.RedisCacheFactoryBean">
+		<property name="name" value="redisCache10minutes" /><!-- 缓存名称 -->
+		<property name="liveTime" value="600" /><!-- 缓存时间 ：以秒为单位-->
+		<property name="redisTemplate" ref="redisTemplate" /><!-- 缓存实现 -->
+	</bean>
+
+   	<!-- redis缓存1小时-->
+	<bean id="redisCache3"
+		class="com.baomidou.framework.cache.redis.RedisCacheFactoryBean">
+		<property name="name" value="redisCache1hour" /><!-- 缓存名称 -->
+		<property name="liveTime" value="3600" /><!-- 缓存时间 ：以秒为单位-->
+		<property name="redisTemplate" ref="redisTemplate" /><!-- 缓存实现 -->
+	</bean>
+
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="600" />
+		<property name="maxIdle" value="300" />
+		<property name="maxWaitMillis" value="1000" />
+		<property name="testOnBorrow" value="true" />
+	</bean>
+
+	<bean id="jedisConnection"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<constructor-arg index="0" ref="poolConfig" />
+		<property name="hostName" value="127.0.0.1" />
+		<property name="port" value="6379" />
+		<property name="password" value="" />
+		<property name="timeout" value="10000" />
+	</bean>
+
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnection" />
+		<!-- 
+			如果不配置Serializer，那么存储的时候智能使用String， 
+			如果用User类型存储，那么会提示错误 User can't cast to String！！！
+		 -->
+		<property name="keySerializer">
+			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<!-- 序列化 例子
+		<property name="valueSerializer">
+			<bean id="redisJsonSerializer" class="org.springframework.data.redis.serializer.JacksonJsonRedisSerializer">
+				<constructor-arg type="java.lang.Class" value="redis.User"/>
+			</bean>
+		</property>
+		-->
+		<!-- 
+		<property name="valueSerializer">
+			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="hashValueSerializer">
+			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		 -->
+	</bean>
+</beans>
