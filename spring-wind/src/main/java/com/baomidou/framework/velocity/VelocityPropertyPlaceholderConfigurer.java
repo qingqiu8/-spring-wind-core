@@ -28,7 +28,7 @@ import org.apache.velocity.app.Velocity;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.core.io.Resource;
 
-import com.baomidou.mybatisplus.exceptions.MybatisPlusException;
+import com.baomidou.framework.exception.SpringWindException;
 
 /**
  * <p>
@@ -68,7 +68,7 @@ public class VelocityPropertyPlaceholderConfigurer extends PropertyPlaceholderCo
 			Velocity.evaluate(this.velocityContext, writer, "VelocityPropertyPlaceholderConfigurer", br);
 			prop.load(new StringReader(writer.toString()));
 		} catch ( Exception e ) {
-			throw new MybatisPlusException(e);
+			throw new SpringWindException(e);
 		}
 	}
 

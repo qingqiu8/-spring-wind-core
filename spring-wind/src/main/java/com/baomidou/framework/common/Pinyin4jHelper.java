@@ -15,16 +15,18 @@
  */
 package com.baomidou.framework.common;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+
+import com.baomidou.framework.exception.SpringWindException;
+
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
-
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -83,7 +85,7 @@ public class Pinyin4jHelper {
 						}
 					}
 				} catch ( BadHanyuPinyinOutputFormatCombination e ) {
-					e.printStackTrace();
+					throw new SpringWindException(e);
 				}
 			} else {
 				pinyinName.append(nameChar[i]);

@@ -22,6 +22,8 @@ import java.util.Set;
 
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
+import com.baomidou.framework.exception.SpringWindException;
+
 
 /**
  * <p>
@@ -193,7 +195,7 @@ public class MutilPropertyPlaceholderConfigurer extends PropertyPlaceholderConfi
 				if ( value != null ) {
 					prop.put(realKey, value);
 				} else {
-					throw new RuntimeException("impossible empty property for " + realKey);
+					throw new SpringWindException("impossible empty property for " + realKey);
 				}
 			}
 		}

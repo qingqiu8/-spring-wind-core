@@ -19,6 +19,8 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+import com.baomidou.framework.exception.SpringWindException;
+
 /**
  * <p>
  * Spring 工具类 ，获取Spring容器中的上下文信息
@@ -47,7 +49,7 @@ public class SpringContextHolder implements ApplicationContextAware {
 
 	private static void checkApplicationContext() {
 		if (context == null) {
-			throw new IllegalStateException("applicaitonContext未注入,请在applicationContext.xml中定义SpringContextHolder");
+			throw new SpringWindException("applicaitonContext未注入,请在applicationContext.xml中定义SpringContextHolder");
 		}
 	}
 

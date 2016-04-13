@@ -1,0 +1,67 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/cache
+           http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <!-- 启用缓存注解功能，这个是必须的，否则注解不会生效，另外，该注解一定要声明在spring主配置文件中才会生效 -->
+	<cache:annotation-driven cache-manager="cacheManager"
+		key-generator="myKeyGenerator" />
+
+    <!-- 自定义key生成器 -->
+	<bean id="myKeyGenerator" class="com.baomidou.framework.cache.MyKeyGenerator" />
+
+    <!-- spring自带的cache管理器 -->
+	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+		<property name="caches">
+			<set>
+				<ref bean="defaultCache" /><!-- 本地永久缓存，除非项目重启 -->
+				<ref bean="guavaCache1" /><!-- 本地缓存60秒 -->
+				<ref bean="guavaCache2" /><!-- 本地缓存10分钟 -->
+				<ref bean="guavaCache3" /><!-- 本地缓存1小时 -->
+				<ref bean="redisCache1" /><!-- redis 缓存60秒 -->
+				<ref bean="redisCache2" /><!-- redis 缓存10分钟 -->
+				<ref bean="redisCache3" /><!-- redis 缓存1小时 -->
+			</set>
+		</property>
+	</bean>
+    
+    <!--spring 默认缓存配置,缓存项目为永久生效不会自动过期 -->
+	<bean id="defaultCache"
+		class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+		<property name="name" value="default" /><!-- 缓存名称 -->
+	</bean>
+    
+    <!-- guava缓存1分钟 -->
+	<bean id="guavaCache1"
+		class="com.baomidou.framework.cache.guava.GuavaCacheFactoryBean">
+		<property name="name" value="guavaCache60seconds" /><!-- 缓存名称 -->
+		<property name="maximumSize" value="1000" /><!-- 缓存最大数量 -->
+		<property name="expireAfterAccessInSeconds" value="60" /><!-- 访问一次后向后延长的时间：以秒为单位 -->
+		<property name="expireAfterWriteInSeconds" value="60" /><!-- 缓存时间：以秒为单位 -->
+	</bean>
+    
+    <!-- guava缓存10分钟 -->
+	<bean id="guavaCache2"
+		class="com.baomidou.framework.cache.guava.GuavaCacheFactoryBean">
+		<property name="name" value="guavaCache10minutes" />
+		<property name="maximumSize" value="1000" /><!-- 缓存最大数量 -->
+		<property name="expireAfterAccessInSeconds" value="600" /><!-- 访问一次后向后延长的时间：以秒为单位 -->
+		<property name="expireAfterWriteInSeconds" value="600" /><!-- 缓存时间：以秒为单位 -->
+	</bean>
+    
+    <!-- guava缓存1小时 -->
+	<bean id="guavaCache3"
+		class="com.baomidou.framework.cache.guava.GuavaCacheFactoryBean">
+		<property name="name" value="guavaCache1hour" />
+		<property name="maximumSize" value="1000" /><!-- 缓存最大数量 -->
+		<property name="expireAfterAccessInSeconds" value="3600" /><!-- 访问一次后向后延长的时间：以秒为单位 -->
+		<property name="expireAfterWriteInSeconds" value="3600" /><!-- 缓存时间：以秒为单位 -->
+	</bean>
+    
+</beans>
