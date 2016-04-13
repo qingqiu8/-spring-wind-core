@@ -23,6 +23,4 @@
 
     <bean id="quartzJobManager" class="com.baomidou.framework.quartz.QuartzJobManager"></bean>
 
-
-    <!-- 定时任务：工单号序列 -->
 </beans>
