@@ -1,28 +1,54 @@
+/**
+ * Copyright (c) 2011-2014, yyn_0210@sina.com.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
 package com.baomidou.framework.quartz;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.quartz.*;
-import org.quartz.impl.triggers.CronTriggerImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.quartz.SchedulerFactoryBean;
-import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
 
+import org.quartz.CronScheduleBuilder;
+import org.quartz.Job;
+import org.quartz.JobBuilder;
+import org.quartz.JobDetail;
+import org.quartz.JobKey;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
+import org.quartz.TriggerKey;
+import org.quartz.impl.triggers.CronTriggerImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
+import org.springframework.stereotype.Service;
+
 /**
- *  QUARTZ管理器
+ * <p>
+ * QuartzJob 管理器
+ * </p>
+ * 
  * @author yyn_0210@sina.com
- * @history 2009-8-18 新建
- * @version V2.0
+ * @Date 2016-04-13
  */
 @Service
 public class QuartzJobManager {
     private final static String JOB_GROUP_NAME = "job_group";
     private final static String TRIGGER_GROUP_NAME = "trigger_group";
-    private final Log log = LogFactory.getLog(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(QuartzJobManager.class);
 
     /**
      * 注入调度工厂
@@ -173,9 +199,7 @@ public class QuartzJobManager {
             scheduler.pauseTrigger(TriggerKey.triggerKey(triggerName, triggerGroupName));
 
         } catch (SchedulerException e) {
-            log.error(
-                    "scheduler.getTrigger(triggerName, triggerGroupName) Exception: ",
-                    e);
+        	logger.error("scheduler.getTrigger(triggerName, triggerGroupName) Exception: ", e);
         }
 
         if (trigger != null) {
@@ -187,9 +211,7 @@ public class QuartzJobManager {
                 scheduler.resumeTrigger(TriggerKey.triggerKey(triggerName, triggerGroupName));
                 scheduler.rescheduleJob(TriggerKey.triggerKey(triggerName, triggerGroupName), ct);
             } catch (SchedulerException e) {
-                log.error(
-                        "scheduler.resumeTrigger(triggerName, triggerGroupName) Exception: ",
-                        e);
+            	logger.error("scheduler.resumeTrigger(triggerName, triggerGroupName) Exception: ", e);
                 throw new SchedulerException();
             }
         }
