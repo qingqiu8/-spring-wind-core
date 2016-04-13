@@ -22,12 +22,14 @@
 ```
 
 
-> 注解  @Cacheable 和  @CacheEvict 说明
+> 注解 @Cacheable、@CachePut、@CacheEvict 注释介绍
 
 ```
-@Cacheable 添加缓存
+@Cacheable 主要针对方法配置，能够根据方法的请求参数对其结果进行缓存
+@CachePut 主要针对方法配置，能够根据方法的请求参数对其结果进行缓存，和 @Cacheable 不同的是，它每次都会触发真实方法的调用
+@CachEvict 主要针对方法配置，能够根据一定的条件对缓存进行清空
 
-@CacheEvict 清理缓存
+基本原理：一句话介绍就是Spring AOP的动态代理技术。 如果读者对Spring AOP不熟悉的话，可以去看看官方文档
 ```
 
 
