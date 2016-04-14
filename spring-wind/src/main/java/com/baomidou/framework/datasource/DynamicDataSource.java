@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * <p>
- * ¶àÊı¾İÔ´µÄÅäÖÃ,²¢Ö§³Ö¶à´Ó¿â
+ * å¤šæ•°æ®æºçš„é…ç½®,å¹¶æ”¯æŒå¤šä»åº“
  * </p>
  *
  * @author L.cm
@@ -36,7 +36,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
     private static final ThreadLocal<String> dataSourceHolder = new ThreadLocal<String>();
 
     /**
-     * Ñ¡ÔñÊ¹ÓÃÊı¾İ¿â£¬²¢°ÑÑ¡Ôñ·Åµ½µ±Ç°ThreadLocalµÄÕ»¶¥
+     * é€‰æ‹©ä½¿ç”¨æ•°æ®åº“ï¼Œå¹¶æŠŠé€‰æ‹©æ”¾åˆ°å½“å‰ThreadLocalçš„æ ˆé¡¶
      */
     public static void use(String key, int dbSize) {
         if (dbSize < 1) {
@@ -49,14 +49,14 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
     }
 
     /**
-     * ÖØÖÃ
+     * é‡ç½®
      */
     public static void reset() {
         dataSourceHolder.remove();
     }
 
     /**
-     * Èç¹ûÊÇÑ¡ÔñÊ¹ÓÃÊı¾İ¿â
+     * å¦‚æœæ˜¯é€‰æ‹©ä½¿ç”¨æ•°æ®åº“
      */
     @Override
     protected Object determineCurrentLookupKey() {

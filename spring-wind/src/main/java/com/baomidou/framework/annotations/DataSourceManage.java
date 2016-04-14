@@ -18,13 +18,13 @@ package com.baomidou.framework.annotations;
 import java.lang.annotation.*;
 
 /**
- * Êı¾İÔ´¹ÜÀí£¬Ê¹ÓÃname×¢Èë
+ * æ•°æ®æºç®¡ç†ï¼Œä½¿ç”¨nameæ³¨å…¥
  */
 @Inherited
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DataSourceManage {
 	String name() default "";
-	// Êı¾İ¿âµÄÊıÁ¿£¬Ä¬ÈÏÖ»¶àÊı¾İÔ´£¬¹ÊÄ¬ÈÏÎª0£¬¶à´Ó¿âµÄ¿ÉÉèÖÃÎª´Ó¿âÊıÁ¿
+	// æ•°æ®åº“çš„æ•°é‡ï¼Œé»˜è®¤åªå¤šæ•°æ®æºï¼Œæ•…é»˜è®¤ä¸º0ï¼Œå¤šä»åº“çš„å¯è®¾ç½®ä¸ºä»åº“æ•°é‡
 	int dbSize() default 0;
 }

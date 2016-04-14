@@ -9,7 +9,7 @@ package com.baomidou.framework.datasource;
  * <pre>
  *
  * <!--数据源切面注入spring-->
- * <bean id="dsChangeAspect" class="com.baomidou.framework.aop.DataSourceAop"/>
+ * <bean id="dsDataSourceAop" class="com.baomidou.framework.aop.DataSourceAop"/>
  *
  * <!--多数据源-->
  * <bean id="dynamicDataSource" class="com.baomidou.framework.datasource.DynamicDataSource">
