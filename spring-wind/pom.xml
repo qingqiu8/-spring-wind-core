@@ -148,6 +148,7 @@
 			<artifactId>quartz</artifactId>
 			<version>${quartz.version}</version>
 			<scope>provided</scope>
+
 		</dependency>
 		<!-- scheduler end -->
 
