@@ -17,8 +17,5 @@
 </dependency>
 ```
 
-
-> 配置 参考 app-guava.xml
-
 > 使用例如： @Cacheable(value = "testCache", key = "#schoolId")
 
