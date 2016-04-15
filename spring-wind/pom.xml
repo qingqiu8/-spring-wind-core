@@ -148,7 +148,13 @@
 			<artifactId>quartz</artifactId>
 			<version>${quartz.version}</version>
 			<scope>provided</scope>
-		</dependency>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 		<!-- scheduler end -->
 
 		<!-- pinyin4j begin -->
