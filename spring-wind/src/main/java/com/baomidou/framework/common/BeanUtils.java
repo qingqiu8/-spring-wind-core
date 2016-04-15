@@ -22,78 +22,84 @@ import java.util.Map;
 
 /**
  * <p>
- * »ùÓÚCGlib£¬À©Õ¹BeanUtils£¬¶ÔÓÚ¸´ÔÓÀàĞÍµÄCGlib¸üÓĞÓÅÊÆ
+ * åŸºäºCGlibï¼Œæ‰©å±•BeanUtilsï¼Œå¯¹äºå¤æ‚ç±»å‹çš„CGlibæ›´æœ‰ä¼˜åŠ¿
  * </p>
+ * 
  * @author L.cm
- * @date 2016-03-24
+ * @date 2016-04-15
  */
 public final class BeanUtils extends org.springframework.beans.BeanUtils {
-	private BeanUtils(){}
+
+	private BeanUtils() {
+	}
+
 
 	/**
-	 * ÊµÀı»¯¶ÔÏó
-	 * @param clazz Àà
-	 * @return ¶ÔÏó
+	 * å®ä¾‹åŒ–å¯¹è±¡
+	 * @param clazz ç±»
+	 * @return å¯¹è±¡
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T newInstance(Class<?> clazz) {
+	public static <T> T newInstance( Class<?> clazz ) {
 		try {
 			return (T) clazz.newInstance();
-		} catch (InstantiationException e) {
+		} catch ( InstantiationException e ) {
 			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
+		} catch ( IllegalAccessException e ) {
 			throw new RuntimeException(e);
 		}
 	}
 
+
 	/**
-	 * ÊµÀı»¯¶ÔÏó
-	 * @param clazzStr ÀàÃû
+	 * å®ä¾‹åŒ–å¯¹è±¡
+	 * @param clazzStr ç±»å
 	 * @return {T}
 	 */
-	public static <T> T newInstance(String clazzStr) {
+	public static <T> T newInstance( String clazzStr ) {
 		try {
 			Class<?> clazz = Class.forName(clazzStr);
 			return newInstance(clazz);
-		} catch (ClassNotFoundException e) {
+		} catch ( ClassNotFoundException e ) {
 			throw new RuntimeException(e);
 		}
 	}
 
+
 	/**
-	 * copy ¶ÔÏóÊôĞÔµ½ÁíÒ»¸ö¶ÔÏó£¬Ä¬ÈÏ²»Ê¹ÓÃConvert
+	 * copy å¯¹è±¡å±æ€§åˆ°å¦ä¸€ä¸ªå¯¹è±¡ï¼Œé»˜è®¤ä¸ä½¿ç”¨Convert
 	 * @param src
-	 * @param clazz ÀàÃû
+	 * @param clazz ç±»å
 	 * @return {T}
 	 */
-	public static <T> T copy(Object src, Class<T> clazz) {
+	public static <T> T copy( Object src, Class<T> clazz ) {
 		BeanCopier copier = BeanCopier.create(src.getClass(), clazz, false);
-
 		T to = newInstance(clazz);
 		copier.copy(src, to, null);
 		return to;
 	}
 
-	/**
-	 * ¿½±´¶ÔÏó
-	 * @param src Ô´¶ÔÏó
-	 * @param dist ĞèÒª¸³ÖµµÄ¶ÔÏó
-	 */
-	public static void copy(Object src, Object dist) {
-		BeanCopier copier = BeanCopier
-				.create(src.getClass(), dist.getClass(), false);
 
+	/**
+	 * æ‹·è´å¯¹è±¡
+	 * @param src æºå¯¹è±¡
+	 * @param dist éœ€è¦èµ‹å€¼çš„å¯¹è±¡
+	 */
+	public static void copy( Object src, Object dist ) {
+		BeanCopier copier = BeanCopier.create(src.getClass(), dist.getClass(), false);
 		copier.copy(src, dist, null);
 	}
 
+
 	/**
-	 * ½«¶ÔÏó×°³ÉmapĞÎÊ½
-	 * ×¢Òâ£ºÉú³ÉµÄÊÇunmodifiableMap
-	 * @param src Ô´¶ÔÏó
+	 * å°†å¯¹è±¡è£…æˆmapå½¢å¼
+	 * æ³¨æ„ï¼šç”Ÿæˆçš„æ˜¯unmodifiableMap
+	 * @param src æºå¯¹è±¡
 	 * @return {Map<K, V>}
 	 */
-	@SuppressWarnings("rawtypes")
-	public static <K, V> Map<K, V> toMap(Object src) {
+	@SuppressWarnings("unchecked")
+	public static <K, V> Map<K, V> toMap( Object src ) {
 		return BeanMap.create(src);
 	}
+
 }

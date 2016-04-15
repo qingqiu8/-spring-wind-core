@@ -1,5 +1,5 @@
-/*--------------------------------------------------------------------------
- *  Copyright (c) 2009-2020, dennisit.pu All rights reserved. 
+/**
+ * Copyright (c) 2011-2014, dennisit.pu (dennisit@163.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -12,9 +12,7 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
- * Author: dennisit.pu (dennisit@163.com)
- *--------------------------------------------------------------------------
-*/
+ */
 package com.baomidou.framework.controller;
 
 import org.springframework.http.MediaType;
@@ -25,21 +23,23 @@ import org.springframework.web.servlet.mvc.method.annotation.AbstractJsonpRespon
 
 /**
  * <p>
- *     ×Ô¶¯jsonp
+ * è‡ªåŠ¨jsonp
  * </p>
- * created on 2016/1/13
+ * 
  * @author dennisit.pu
- * @version 1.0
+ * @Date 2016-04-15
  */
 @ControllerAdvice
 public class JsonpResponseAdvice extends AbstractJsonpResponseBodyAdvice {
 
-    public JsonpResponseAdvice() {
-        super("callback");
-    }
+	public JsonpResponseAdvice() {
+		super("callback");
+	}
 
-    @Override
-    protected MediaType getContentType(MediaType contentType, ServerHttpRequest request, ServerHttpResponse response) {
-        return new MediaType("application", "javascript", contentType.getCharSet());
-    }
+
+	@Override
+	protected MediaType getContentType( MediaType contentType, ServerHttpRequest request,
+			ServerHttpResponse response ) {
+		return new MediaType("application", "javascript", contentType.getCharSet());
+	}
 }
