@@ -54,6 +54,9 @@
 
 		<!-- pinyin4j -->
 		<pinyin4j.version>2.5.1</pinyin4j.version>
+
+		<!-- sigar -->
+		<sigar.version>1.6.4</sigar.version>
 	</properties>
 
 	<dependencies>
@@ -166,6 +169,15 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- pinyin4j end -->
+
+		<!-- sigar begin -->
+		<dependency>
+			<groupId>org.fusesource</groupId>
+			<artifactId>sigar</artifactId>
+			<version>${sigar.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- sigar end -->
 
 		<!--poi start-->
 		<dependency>
