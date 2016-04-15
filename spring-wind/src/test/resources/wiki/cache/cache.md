@@ -39,4 +39,22 @@
 private RedisTemplate<String, String> redisTemplate;	
 ```
 
-
+> redis cache配置
+```xml
+<!--spring cache-->
+<bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager"
+      c:redisOperations-ref="redisTemplate">
+    <!-- 默认缓存5分钟 -->
+    <property name="defaultExpiration" value="300"></property>
+    <property name="usePrefix" value="true"></property>
+    <!-- cacheName 缓存超时配置，10分钟，半小时，一小时 -->
+    <property name="expires">
+        <map key-type="java.lang.String" value-type="java.lang.Long">
+            <entry key="tenMinutesCache" value="600"/>
+            <entry key="halfHourCache" value="1800"/>
+            <entry key="oneHourCache" value="3600"/>
+        </map>
+    </property>
+</bean>
+<cache:annotation-driven cache-manager="cacheManager"/>
+```
