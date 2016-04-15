@@ -44,6 +44,7 @@
 		<kisso.version>3.6.5</kisso.version>
 		<bcprov.version>1.50</bcprov.version>
 		<fastjson.version>1.2.8</fastjson.version>
+		<poi.version>3.9</poi.version>
 
 		<!-- cache -->
 		<guava.version>19.0</guava.version>
@@ -165,6 +166,25 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- pinyin4j end -->
+
+		<!--poi start-->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<!--poi end-->
 	</dependencies>
 
 	<profiles>
