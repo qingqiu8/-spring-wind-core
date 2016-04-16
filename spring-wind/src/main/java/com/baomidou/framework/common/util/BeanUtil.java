@@ -13,12 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.baomidou.framework.common;
-
-import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.cglib.beans.BeanMap;
+package com.baomidou.framework.common.util;
 
 import java.util.Map;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.cglib.beans.BeanCopier;
+import org.springframework.cglib.beans.BeanMap;
 
 /**
  * <p>
@@ -28,9 +29,10 @@ import java.util.Map;
  * @author L.cm
  * @date 2016-04-15
  */
-public final class BeanUtils extends org.springframework.beans.BeanUtils {
+public final class BeanUtil extends BeanUtils {
 
-	private BeanUtils() {
+	protected BeanUtil() {
+		/* 保护 */
 	}
 
 

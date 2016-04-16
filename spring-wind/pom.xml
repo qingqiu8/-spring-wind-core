@@ -34,10 +34,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.2.5.RELEASE</spring.version>
 		<aspectjweaver.version>1.8.9</aspectjweaver.version>
-		<servlet-api.version>2.5</servlet-api.version>
-		<velocity.version>1.7</velocity.version>
 		<slf4j.version>1.7.21</slf4j.version>
-		<mail.version>1.4.7</mail.version>
 		<mybatis-plus.version>1.2.10</mybatis-plus.version>
 
 		<!-- kisso -->
@@ -45,20 +42,13 @@
 		<bcprov.version>1.50</bcprov.version>
 		<fastjson.version>1.2.8</fastjson.version>
 
-		<!-- cache -->
-		<guava.version>19.0</guava.version>
-
-		<!-- scheduler -->
+		<!-- provided -->
+		<servlet-api.version>2.5</servlet-api.version>
+		<velocity.version>1.7</velocity.version>
+		<mail.version>1.4.7</mail.version>
 		<quartz.version>2.2.2</quartz.version>
-
-		<!-- pinyin4j -->
 		<pinyin4j.version>2.5.1</pinyin4j.version>
-
-		<!-- sigar -->
 		<sigar.version>1.6.4</sigar.version>
-		
-		<!-- poi -->
-		<poi.version>3.9</poi.version>
 	</properties>
 
 	<dependencies>
@@ -139,14 +129,6 @@
 			<artifactId>mybatis-plus</artifactId>
 			<version>${mybatis-plus.version}</version>
 		</dependency>
-		<!-- cache begin -->
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>${guava.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- cache end -->
 		
 		<!-- scheduler begin -->
 		<dependency>
@@ -180,27 +162,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- sigar end -->
-
-		<!--poi begin-->
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>${poi.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>${poi.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml-schemas</artifactId>
-			<version>${poi.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<!--poi end-->
 	</dependencies>
 
 	<profiles>
