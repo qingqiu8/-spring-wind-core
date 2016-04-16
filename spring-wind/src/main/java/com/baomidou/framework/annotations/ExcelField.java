@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.baomidou.framework.poi;
+package com.baomidou.framework.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
