@@ -2,6 +2,8 @@
 
 SSM 架构核心库，带给您的只有惊喜！
 
+[演示项目 - 点击](http://git.oschina.net/juapk/SpringWind)
+
 > 技术讨论 QQ 群 235079513 
 
 ------------------------------------------------
@@ -28,4 +30,3 @@ Features
 Copyright
 ====================
 Apache License, Version 2.0
-
