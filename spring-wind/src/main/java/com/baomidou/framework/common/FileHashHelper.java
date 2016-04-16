@@ -28,8 +28,9 @@ import org.slf4j.LoggerFactory;
 import com.baomidou.kisso.common.encrypt.Byte2Hex;
 
 /**
- * 文件 Hash 帮助类
  * <p>
+ * 文件 Hash 帮助类
+ * </p>
  * 
  * @author hubin
  * @Date 2016-04-16
