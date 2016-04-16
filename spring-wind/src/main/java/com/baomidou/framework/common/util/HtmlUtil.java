@@ -36,7 +36,7 @@ public class HtmlUtil {
 	 * @return 转换后的字符串
 	 */
 	public static String restoreEscaped(String htmlStr) {
-		if (StringUtil.isEmpty(htmlStr)) {
+		if (htmlStr == null || "".equals(htmlStr)) {
 			return htmlStr;
 		}
 		return htmlStr.replace("&lt", "<").replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&")
