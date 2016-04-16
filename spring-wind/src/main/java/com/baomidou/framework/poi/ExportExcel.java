@@ -31,6 +31,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import com.baomidou.framework.annotations.ExcelField;
+import com.baomidou.framework.common.Encodes;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -47,7 +49,6 @@ import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baomidou.framework.encode.Encodes;
 import com.baomidou.framework.reflect.Reflections;
 import com.google.common.collect.Lists;
 

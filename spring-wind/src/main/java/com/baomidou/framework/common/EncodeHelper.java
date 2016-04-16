@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.baomidou.framework.encode;
+package com.baomidou.framework.common;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -38,7 +38,7 @@ import com.baomidou.framework.exception.SpringWindException;
  * @author calvin
  * @version 2016-04-15
  */
-public class Encodes {
+public class EncodeHelper {
 
 	private static final String DEFAULT_URL_ENCODING = "UTF-8";
 	private static final char[] BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
