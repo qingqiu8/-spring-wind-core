@@ -104,7 +104,8 @@ public class SuperController {
 			_size = Integer.parseInt(request.getParameter("_size"));
 		}
 		if (request.getParameter("_index") != null) {
-			_index = Integer.parseInt(request.getParameter("_index"));
+			int _offset = Integer.parseInt(request.getParameter("_index"));
+			_index = _offset / _size + 1;
 		}
 		return new Page<T>(_index, _size);
 	}
