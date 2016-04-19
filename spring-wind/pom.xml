@@ -179,6 +179,7 @@
 			<groupId>org.im4java</groupId>
 			<artifactId>im4java</artifactId>
 			<version>${im4java.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<!-- GraphicsMagick-client end -->
 	</dependencies>
