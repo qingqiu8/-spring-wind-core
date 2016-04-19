@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.baomidou</groupId>
 	<artifactId>spring-wind</artifactId>
-	<version>1.0.1</version>
+	<version>1.1</version>
 	<packaging>jar</packaging>
 
 	<name>spring-wind</name>
@@ -40,7 +40,7 @@
 		<!-- kisso -->
 		<kisso.version>3.6.5</kisso.version>
 		<bcprov.version>1.50</bcprov.version>
-		<fastjson.version>1.2.8</fastjson.version>
+		<fastjson.version>1.2.9</fastjson.version>
 
 		<!-- provided -->
 		<servlet-api.version>2.5</servlet-api.version>
