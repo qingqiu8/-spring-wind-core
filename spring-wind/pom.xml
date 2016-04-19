@@ -50,6 +50,7 @@
 		<quartz.version>2.2.2</quartz.version>
 		<pinyin4j.version>2.5.1</pinyin4j.version>
 		<sigar.version>1.6.4</sigar.version>
+		<im4java.version>1.4.0</im4java.version>
 	</properties>
 
 	<dependencies>
@@ -172,6 +173,14 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- sigar end -->
+		
+		<!-- GraphicsMagick-client begin -->
+		<dependency>
+			<groupId>org.im4java</groupId>
+			<artifactId>im4java</artifactId>
+			<version>${im4java.version}</version>
+		</dependency>
+		<!-- GraphicsMagick-client end -->
 	</dependencies>
 
 	<profiles>

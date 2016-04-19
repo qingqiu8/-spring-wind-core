@@ -21,6 +21,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.velocity.VelocityContext;
@@ -42,11 +44,14 @@ import com.baomidou.framework.exception.SpringWindException;
  */
 public class VelocityPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
 
+
 	private String charsetName = "UTF-8";
 
-	private VelocityContext velocityContext = new VelocityContext();
+	private static VelocityContext velocityContext = null;
 
 	private Resource[] locations;
+
+	private RunEnvironment runEnvironment;
 
 
 	@Override
@@ -65,7 +70,16 @@ public class VelocityPropertyPlaceholderConfigurer extends PropertyPlaceholderCo
 		try {
 			StringWriter writer = new StringWriter();
 			BufferedReader br = new BufferedReader(new InputStreamReader(input, this.charsetName));
-			Velocity.evaluate(this.velocityContext, writer, "VelocityPropertyPlaceholderConfigurer", br);
+			if ( velocityContext == null ) {
+				/*
+				 * 设置环境变量判断逻辑
+				 */
+				Map<Object, Object> context = new HashMap<Object, Object>();
+				context.put("env", this.getRunEnvironment());
+				context.putAll(System.getProperties());
+				velocityContext = new VelocityContext(context);
+			}
+			Velocity.evaluate(velocityContext, writer, "VelocityPropertyPlaceholderConfigurer", br);
 			prop.load(new StringReader(writer.toString()));
 		} catch ( Exception e ) {
 			throw new SpringWindException(e);
@@ -86,13 +100,26 @@ public class VelocityPropertyPlaceholderConfigurer extends PropertyPlaceholderCo
 	}
 
 
-	public void setCharsetName( String charsetName ) {
-		this.charsetName = charsetName;
+	public RunEnvironment getRunEnvironment() {
+		if ( runEnvironment == null ) {
+			return new RunEnvironment();
+		}
+		return runEnvironment;
 	}
 
 
-	public void setVelocityContext( VelocityContext velocityContext ) {
-		this.velocityContext = velocityContext;
+	public void setRunEnvironment( RunEnvironment runEnvironment ) {
+		this.runEnvironment = runEnvironment;
+	}
+
+
+	public String getCharsetName() {
+		return charsetName;
+	}
+
+
+	public void setCharsetName( String charsetName ) {
+		this.charsetName = charsetName;
 	}
 
 }

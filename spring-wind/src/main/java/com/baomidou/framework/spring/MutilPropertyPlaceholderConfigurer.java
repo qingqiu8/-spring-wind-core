@@ -23,6 +23,7 @@ import java.util.Set;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
 import com.baomidou.framework.exception.SpringWindException;
+import com.baomidou.kisso.common.util.EnvUtil;
 
 
 /**
@@ -71,7 +72,7 @@ import com.baomidou.framework.exception.SpringWindException;
  * @Date 2016-01-27
  */
 public class MutilPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
-	
+
 	/**
 	 * <p>
 	 * 运行环境<br>
@@ -117,10 +118,8 @@ public class MutilPropertyPlaceholderConfigurer extends PropertyPlaceholderConfi
 			 * 配置为  jdb.url_30_mode = xxxxx 
 			 */
 		} else {
-			/**
-			 * Windows 认为是开发环境
-			 */
-			if (isLinux()) {
+			/* 默认 Windows 认为是开发环境 */
+			if ( EnvUtil.isLinux() ) {
 				mode = ONLINE;
 			} else {
 				mode = DEV;
@@ -130,18 +129,6 @@ public class MutilPropertyPlaceholderConfigurer extends PropertyPlaceholderConfi
 		return mode;
 	}
 
-	
-	/**
-	 * 判断是否为 Linux 环境
-	 */
-	protected boolean isLinux(  ) {
-		String OS = System.getProperty("os.name").toLowerCase();
-		logger.info("os.name: " + OS);
-		if (OS != null && OS.contains("windows")) {
-			return false;
-		}
-		return true;
-	}
 
 	/**
 	 * 
@@ -157,6 +144,7 @@ public class MutilPropertyPlaceholderConfigurer extends PropertyPlaceholderConfi
 		return this.properties;
 	}
 
+
 	/**
 	 * <p>
 	 * 转换 prop 加载内容
@@ -165,7 +153,7 @@ public class MutilPropertyPlaceholderConfigurer extends PropertyPlaceholderConfi
 	 * 					spring 容器加载 Properties 文件
 	 * @return
 	 */
-	protected Properties convertMergeProperties(Properties mergeProperties) {
+	protected Properties convertMergeProperties( Properties mergeProperties ) {
 		Properties prop = new Properties();
 		String runMode = "_" + getRunMode() + "_mode";
 		Set<Entry<Object, Object>> es = mergeProperties.entrySet();
@@ -201,6 +189,7 @@ public class MutilPropertyPlaceholderConfigurer extends PropertyPlaceholderConfi
 		}
 		return prop;
 	}
+
 
 	/** 
 	 * 
