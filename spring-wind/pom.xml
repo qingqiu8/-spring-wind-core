@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.baomidou</groupId>
 	<artifactId>spring-wind</artifactId>
-	<version>1.1</version>
+	<version>1.1.1</version>
 	<packaging>jar</packaging>
 
 	<name>spring-wind</name>
@@ -35,10 +35,10 @@
 		<spring.version>4.2.5.RELEASE</spring.version>
 		<aspectjweaver.version>1.8.9</aspectjweaver.version>
 		<slf4j.version>1.7.21</slf4j.version>
-		<mybatis-plus.version>1.2.11</mybatis-plus.version>
+		<mybatis-plus.version>1.2.12</mybatis-plus.version>
 
 		<!-- kisso -->
-		<kisso.version>3.6.5</kisso.version>
+		<kisso.version>3.6.6</kisso.version>
 		<bcprov.version>1.50</bcprov.version>
 		<fastjson.version>1.2.9</fastjson.version>
 
