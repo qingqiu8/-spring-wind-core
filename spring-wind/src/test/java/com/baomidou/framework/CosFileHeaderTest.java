@@ -15,8 +15,6 @@
  */
 package com.baomidou.framework;
 
-import java.io.File;
-
 import com.baomidou.framework.upload.CosFileHeader;
 
 /**
@@ -30,12 +28,7 @@ import com.baomidou.framework.upload.CosFileHeader;
 public class CosFileHeaderTest {
 
 	public static void main( String[] args ) {
-		try {
-			String fileHeader = CosFileHeader.getThreeBytes(new File("c:/kisso.pdf"));
-			System.err.println("文件头3个字节内容：" + fileHeader);
-		} catch ( Exception e ) {
-			e.printStackTrace();
-		}
+		System.out.println(CosFileHeader.getThreeBytes("c:/kisso.pdf"));
 	}
 
 }

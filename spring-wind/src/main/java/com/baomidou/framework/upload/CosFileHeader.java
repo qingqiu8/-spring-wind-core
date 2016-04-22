@@ -15,8 +15,8 @@
  */
 package com.baomidou.framework.upload;
 
-import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 
 /**
  * <p>
@@ -59,17 +59,28 @@ public class CosFileHeader {
 	 * 获取文件类型
 	 * </p>
 	 * 
-	 * @param file
-	 * 			文件 {@link File}
-	 * @return
+	 * @param filePath
+	 * 				文件路径
+	 * @return 文件头信息
 	 */
-	public static String getThreeBytes( File file ) throws Exception {
-		FileInputStream in = new FileInputStream(file);
-		byte[] data = new byte[3];
-		in.mark(3);
-		in.read(data, 0, data.length);
-		in.reset();
-		return bytesToHexString(data);
+	public static String getThreeBytes( String filePath ) {
+		FileInputStream is = null;
+		String value = null;
+		try {
+			is = new FileInputStream(filePath);
+			byte[] b = new byte[3];
+			is.read(b, 0, b.length);
+			value = bytesToHexString(b);
+		} catch (Exception e) {
+		} finally {
+			if (null != is) {
+				try {
+					is.close();
+				} catch (IOException e) {
+				}
+			}
+		}
+		return value;
 	}
 
 }
