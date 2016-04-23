@@ -18,14 +18,15 @@ SSM 架构核心库，带给您的只有惊喜！
 演示界面
 =======
 
-![登录效果](http://git.oschina.net/uploads/images/2016/0415/233200_ee76b11a_12260.png "登录效果")
+![登录效果](http://git.oschina.net/uploads/images/2016/0423/181624_cd5f4706_12260.png "登录效果")
 
-![后台发送邮件测试](http://git.oschina.net/uploads/images/2016/0417/195044_19dcb437_12260.png "后台发送邮件测试")
+![注册效果](http://git.oschina.net/uploads/images/2016/0423/181650_811b4427_12260.png "注册效果")
 
-![后台界面效果](http://git.oschina.net/uploads/images/2016/0415/233226_7713bf12_12260.png "后台界面效果")
+![权限管理效果](http://git.oschina.net/uploads/images/2016/0423/182040_f9e11f03_12260.png "权限管理效果")
+
+![监控效果](http://git.oschina.net/uploads/images/2016/0423/182059_de36d868_12260.png "监控效果")
 
 ![锁定效果](http://git.oschina.net/uploads/images/2016/0415/233245_dc44f2f9_12260.png "锁定效果")
-
 
 
 Features
