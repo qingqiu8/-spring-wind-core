@@ -15,8 +15,10 @@
  */
 package com.baomidou.framework.controller;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +50,13 @@ public class SuperController {
 	@Autowired
 	protected HttpServletResponse response;
 
+	@Autowired
+	protected HttpSession session;
+
+	@Autowired
+	protected ServletContext application;
+
+
 	/**
 	 * 用户ID
 	 */
@@ -55,16 +64,18 @@ public class SuperController {
 		return getSSOToken().getId();
 	}
 
+
 	/**
 	 * 返回登录 Token
 	 */
 	protected SSOToken getSSOToken() {
 		SSOToken tk = SSOHelper.attrToken(request);
-		if (tk == null) {
+		if ( tk == null ) {
 			throw new WebException("-1", "The user does not exist, please relogin.");
 		}
 		return tk;
 	}
+
 
 	/**
 	 * 是否为 post 请求
@@ -73,12 +84,14 @@ public class SuperController {
 		return HttpUtil.isPost(request);
 	}
 
+
 	/**
 	 * 是否为 get 请求
 	 */
 	protected boolean isGet() {
 		return HttpUtil.isGet(request);
 	}
+
 
 	/**
 	 * <p>
@@ -89,6 +102,7 @@ public class SuperController {
 		return getPage(10);
 	}
 
+
 	/**
 	 * <p>
 	 * 获取分页对象
@@ -98,16 +112,17 @@ public class SuperController {
 	 *            每页显示数量
 	 * @return
 	 */
-	protected <T> Page<T> getPage(int size) {
+	protected <T> Page<T> getPage( int size ) {
 		int _size = size, _index = 1;
-		if (request.getParameter("_size") != null) {
+		if ( request.getParameter("_size") != null ) {
 			_size = Integer.parseInt(request.getParameter("_size"));
 		}
-		if (request.getParameter("_index") != null) {
+		if ( request.getParameter("_index") != null ) {
 			_index = Integer.parseInt(request.getParameter("_index"));
 		}
 		return new Page<T>(_index, _size);
 	}
+
 
 	/**
 	 * 重定向至地址 url
@@ -116,11 +131,12 @@ public class SuperController {
 	 *            请求地址
 	 * @return
 	 */
-	protected String redirectTo(String url) {
+	protected String redirectTo( String url ) {
 		StringBuffer rto = new StringBuffer("redirect:");
 		rto.append(url);
 		return rto.toString();
 	}
+
 
 	/**
 	 * 
@@ -130,9 +146,10 @@ public class SuperController {
 	 *            转换对象
 	 * @return
 	 */
-	protected String toJson(Object object) {
+	protected String toJson( Object object ) {
 		return JSON.toJSONString(object, SerializerFeature.BrowserCompatible);
 	}
+
 
 	/**
 	 * 
@@ -144,12 +161,13 @@ public class SuperController {
 	 *            序列化特点
 	 * @return
 	 */
-	protected String toJson(Object object, String format) {
-		if (format == null) {
+	protected String toJson( Object object, String format ) {
+		if ( format == null ) {
 			return toJson(object);
 		}
 		return JSON.toJSONStringWithDateFormat(object, format, SerializerFeature.WriteDateUseDateFormat);
 	}
+
 
 	/**
 	 * <p>
@@ -159,13 +177,14 @@ public class SuperController {
 	 * @param object
 	 * @return 跨域或不跨域的字符串
 	 */
-	protected String callback(AjaxResult object) {
+	protected String callback( AjaxResult object ) {
 		return callback(object, null);
 	}
 
-	protected String callback(AjaxResult object, String format) {
+
+	protected String callback( AjaxResult object, String format ) {
 		String callback = request.getParameter("callback");
-		if (callback == null) {
+		if ( callback == null ) {
 			/**
 			 * 非 JSONP 请求
 			 */
@@ -177,11 +196,13 @@ public class SuperController {
 		return json.toString();
 	}
 
-	protected String callbackSuccess(Object obj) {
+
+	protected String callbackSuccess( Object obj ) {
 		return callback(new AjaxResult(obj));
 	}
 
-	protected String callbackFail(String message) {
+
+	protected String callbackFail( String message ) {
 		return callback(new AjaxResult(false, message));
 	}
 
