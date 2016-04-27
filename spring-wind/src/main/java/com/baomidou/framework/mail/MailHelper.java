@@ -27,6 +27,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.Model;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
+import com.baomidou.framework.common.SwConstants;
+
 /**
  * <p>
  * 邮件帮助类
@@ -39,41 +41,46 @@ public class MailHelper {
 
 	protected Logger logger = LoggerFactory.getLogger(MailHelper.class);
 
-	private final static String ENCODING = "UTF-8";
-
 	private VelocityEngine velocityEngine;
 
 	private JavaMailSender mailSender;
 
-	private String encoding = ENCODING;
+	private String charset = SwConstants.UTF_8;
 
 	private String mailTitle;
 
 	private String mailFrom;
 
-	public boolean sendMail(String to, String subject, String tplName, Model model) {
+
+	public boolean sendMail( String to, String subject, String tplName, Model model ) {
 		return sendMail(to, subject, tplName, model.asMap());
 	}
 
-	public boolean sendMail(String[] to, String subject, String tplName, Model model) {
+
+	public boolean sendMail( String[] to, String subject, String tplName, Model model ) {
 		return sendMail(to, subject, tplName, model.asMap());
 	}
 
-	public boolean sendMail(String to, String subject, String tplName, Map<String, Object> data) {
-		return sendMail(new String[] { to }, subject, tplName, data);
+
+	public boolean sendMail( String to, String subject, String tplName, Map<String, Object> data ) {
+		return sendMail(new String[ ] { to }, subject, tplName, data);
 	}
 
-	public boolean sendMail(String[] to, String subject, String tplName, Map<String, Object> data) {
+
+	public boolean sendMail( String[] to, String subject, String tplName, Map<String, Object> data ) {
 		return sendMail(this.mailTitle, this.mailFrom, to, subject, tplName, data);
 	}
 
-	public boolean sendMail(String personal, String from, String to, String subject, String tplName, Model model) {
-		return sendMail(personal, from, new String[] { to }, subject, tplName, model.asMap());
+
+	public boolean sendMail( String personal, String from, String to, String subject, String tplName, Model model ) {
+		return sendMail(personal, from, new String[ ] { to }, subject, tplName, model.asMap());
 	}
 
-	public boolean sendMail(String personal, String from, String[] to, String subject, String tplName, Model model) {
+
+	public boolean sendMail( String personal, String from, String[] to, String subject, String tplName, Model model ) {
 		return sendMail(personal, from, to, subject, tplName, model.asMap());
 	}
+
 
 	/**
 	 * 发送邮件
@@ -92,22 +99,23 @@ public class MailHelper {
 	 *            参数（模板参数）
 	 * @return
 	 */
-	public boolean sendMail(String personal, String from, String[] to, String subject, String tplName,
-			Map<String, Object> data) {
+	public boolean sendMail( String personal, String from, String[] to, String subject, String tplName,
+			Map<String, Object> data ) {
 		try {
 			MimeMessage msg = mailSender.createMimeMessage();
-			MimeMessageHelper msgHelper = new MimeMessageHelper(msg, ENCODING);
+			MimeMessageHelper msgHelper = new MimeMessageHelper(msg, getCharset());
 			msgHelper.setFrom(from, personal);
 			msgHelper.setTo(to);
 			msgHelper.setSubject(subject);
 			msgHelper.setText(this.getHtmltext(tplName, data), true);
 			mailSender.send(msg);
 			return true;
-		} catch (Exception e) {
+		} catch ( Exception e ) {
 			logger.error("send mail error.", e);
 		}
 		return false;
 	}
+
 
 	/**
 	 * <p>
@@ -120,43 +128,52 @@ public class MailHelper {
 	 *            参数
 	 * @return
 	 */
-	public String getHtmltext(String tplName, Map<String, Object> data) {
-		return VelocityEngineUtils.mergeTemplateIntoString(this.velocityEngine, tplName, ENCODING, data);
+	public String getHtmltext( String tplName, Map<String, Object> data ) {
+		return VelocityEngineUtils.mergeTemplateIntoString(this.velocityEngine, tplName, getCharset(), data);
 	}
 
-	public String getHtmltext(String tplName, Model model) {
+
+	public String getHtmltext( String tplName, Model model ) {
 		return getHtmltext(tplName, model.asMap());
 	}
 
-	public void setVelocityEngine(VelocityEngine velocityEngine) {
+
+	public void setVelocityEngine( VelocityEngine velocityEngine ) {
 		this.velocityEngine = velocityEngine;
 	}
 
-	public void setMailSender(JavaMailSender mailSender) {
+
+	public void setMailSender( JavaMailSender mailSender ) {
 		this.mailSender = mailSender;
 	}
 
-	public String getEncoding() {
-		return encoding;
+
+	public String getCharset() {
+		return charset;
 	}
 
-	public void setEncoding(String encoding) {
-		this.encoding = encoding;
+
+	public void setCharset( String charset ) {
+		this.charset = charset;
 	}
+
 
 	public String getMailTitle() {
 		return mailTitle;
 	}
 
-	public void setMailTitle(String mailTitle) {
+
+	public void setMailTitle( String mailTitle ) {
 		this.mailTitle = mailTitle;
 	}
+
 
 	public String getMailFrom() {
 		return mailFrom;
 	}
 
-	public void setMailFrom(String mailFrom) {
+
+	public void setMailFrom( String mailFrom ) {
 		this.mailFrom = mailFrom;
 	}
 

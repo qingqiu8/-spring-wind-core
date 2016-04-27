@@ -30,6 +30,7 @@ import org.apache.velocity.app.Velocity;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.core.io.Resource;
 
+import com.baomidou.framework.common.SwConstants;
 import com.baomidou.framework.exception.SpringWindException;
 
 /**
@@ -44,7 +45,7 @@ import com.baomidou.framework.exception.SpringWindException;
  */
 public class VelocityPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
 
-	private String charset = "UTF-8";
+	private String charset = SwConstants.UTF_8;
 
 	private static VelocityContext velocityContext = null;
 
