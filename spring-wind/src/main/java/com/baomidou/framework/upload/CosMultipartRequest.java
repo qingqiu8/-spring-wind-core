@@ -24,7 +24,6 @@ import com.baomidou.framework.upload.cos.multipart.MacBinaryDecoderOutputStream;
 import com.baomidou.framework.upload.cos.multipart.MultipartParser;
 import com.baomidou.framework.upload.cos.multipart.ParamPart;
 import com.baomidou.framework.upload.cos.multipart.Part;
-import com.baomidou.kisso.SSOConfig;
 
 /**
  * <p>
@@ -49,9 +48,7 @@ public class CosMultipartRequest {
 
 	private int maxPostSize;
 
-	private String encoding;
-
-	private FileRenamePolicy policy;
+	private FileRenamePolicy fileRenamePolicy;
 
 	/*
 	 * <p>
@@ -61,11 +58,13 @@ public class CosMultipartRequest {
 	 * 例如： ffd8ff.jpg;000000.mp4;255044.pdf
 	 * </p>
 	 */
-	private String fileTypeExts = null;
+	private String fileHeaderExts = null;
+
+	private String charset = "UTF-8";
 
 
 	protected CosMultipartRequest() {
-
+		/* 保护 */
 	}
 
 
@@ -75,21 +74,9 @@ public class CosMultipartRequest {
 
 
 	public CosMultipartRequest( HttpServletRequest request, String saveDirectory, int maxPostSize ) {
-		this(request, saveDirectory, maxPostSize, SSOConfig.getSSOEncoding(), new CosFileRenamePolicy());
-	}
-
-
-	public CosMultipartRequest(
-			HttpServletRequest request,
-			String saveDirectory,
-			int maxPostSize,
-			String encoding,
-			FileRenamePolicy policy ) {
 		this.request = request;
 		this.saveDirectory = saveDirectory;
 		this.maxPostSize = maxPostSize;
-		this.encoding = encoding;
-		this.policy = policy;
 	}
 
 
@@ -121,7 +108,7 @@ public class CosMultipartRequest {
 
 		// Parse the incoming multipart, storing files in the dir provided, 
 		// and populate the meta objects which describe what we found
-		MultipartParser parser = new MultipartParser(request, maxPostSize, true, true, encoding);
+		MultipartParser parser = new MultipartParser(request, maxPostSize, true, true, getCharset());
 
 		//读取上传参数
 		HashMap<String, String> paramParts = new HashMap<String, String>();
@@ -139,7 +126,7 @@ public class CosMultipartRequest {
 				if ( fileName != null ) {
 					//filePart.setRenamePolicy(policy); // null policy is OK
 					// The part actually contained a file
-					CosFile cfi = writeTo(dir, fileName, policy, filePart);
+					CosFile cfi = writeTo(dir, fileName, getFileRenamePolicy(), filePart);
 					cfi.setDir(dir.toString());
 					cfi.setOriginal(fileName);
 					cfi.setParamParts(paramParts);
@@ -173,7 +160,7 @@ public class CosMultipartRequest {
 				 * 
 				 * <p>判断头文件</p>
 				 */
-				if ( StringUtils.isNotBlank(getFileTypeExts()) ) {
+				if ( StringUtils.isNotBlank(fileHeaderExts) ) {
 					try {
 						/**
 						 * 读取文件头 3 个字节判断文件类型
@@ -182,9 +169,9 @@ public class CosMultipartRequest {
 						in.mark(3);
 						in.read(data, 0, data.length);
 						in.reset();
-						String fileType = readFileType(data, fileName);
-						if ( fileType != null ) {
-							cf.setSuffix(fileType);
+						String fileExt = readFileExt(data, fileName);
+						if ( fileExt != null ) {
+							cf.setSuffix(fileExt);
 						} else {
 							cf.setUploadCode(UploadCode.ILLEGAL_EXT);
 							logger.debug(" upload fileType is null.");
@@ -196,7 +183,7 @@ public class CosMultipartRequest {
 						return cf;
 					}
 				} else {
-					cf.setSuffix(fileName.substring(fileName.lastIndexOf(".") + 1));
+					cf.setSuffix(fileName.substring(fileName.lastIndexOf(".")));
 				}
 
 				// Check if user supplied directory
@@ -246,15 +233,13 @@ public class CosMultipartRequest {
 	 * @return
 	 * @throws Exception
 	 */
-	private String readFileType( byte[] data, String fileName ) throws Exception {
-		if ( fileTypeExts != null && !"".equals(fileTypeExts) ) {
-			String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1);
-			StringBuffer fe = new StringBuffer();
-			fe.append(CosFileHeader.bytesToHexString(data));
-			fe.append(fileExt);
-			if ( fileTypeExts.contains(fe.toString()) ) {
-				return fileExt;
-			}
+	private String readFileExt( byte[] data, String fileName ) throws Exception {
+		String fileExt = fileName.substring(fileName.lastIndexOf("."));
+		StringBuffer fe = new StringBuffer();
+		fe.append(CosFileHeader.bytesToHexString(data));
+		fe.append(fileExt);
+		if ( fileHeaderExts.contains(fe.toString()) ) {
+			return fileExt;
 		}
 		return null;
 	}
@@ -312,24 +297,36 @@ public class CosMultipartRequest {
 	}
 
 
-	public String getEncoding() {
-		return encoding;
+	public FileRenamePolicy getFileRenamePolicy() {
+		if ( fileRenamePolicy == null ) {
+			return new CosFileRenamePolicy();
+		}
+		return fileRenamePolicy;
 	}
 
 
-	public void setEncoding( String encoding ) {
-		this.encoding = encoding;
+	public void setFileRenamePolicy( FileRenamePolicy fileRenamePolicy ) {
+		this.fileRenamePolicy = fileRenamePolicy;
 	}
 
 
-	public String getFileTypeExts() {
-		return fileTypeExts;
+	public String getFileHeaderExts() {
+		return fileHeaderExts;
 	}
 
 
-	public void setFileTypeExts( String fileTypeExts ) {
-		this.fileTypeExts = fileTypeExts;
+	public void setFileHeaderExts( String fileHeaderExts ) {
+		this.fileHeaderExts = fileHeaderExts;
 	}
 
+
+	public String getCharset() {
+		return charset;
+	}
+
+
+	public void setCharset( String charset ) {
+		this.charset = charset;
+	}
 
 }

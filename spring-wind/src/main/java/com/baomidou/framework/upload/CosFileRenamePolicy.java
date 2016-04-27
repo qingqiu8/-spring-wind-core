@@ -40,7 +40,6 @@ public class CosFileRenamePolicy implements FileRenamePolicy {
 	public File rename( File file ) {
 		StringBuffer pathName = new StringBuffer();
 		pathName.append(Base58Helper.compressedUUID());
-		pathName.append(".");
 		pathName.append(getSuffix());
 		file = new File(file.getParent(), pathName.toString());
 		return file;
