@@ -30,6 +30,7 @@ import org.apache.velocity.app.Velocity;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.core.io.Resource;
 
+import com.baomidou.framework.common.SwConstants;
 import com.baomidou.framework.exception.SpringWindException;
 
 /**
@@ -44,8 +45,7 @@ import com.baomidou.framework.exception.SpringWindException;
  */
 public class VelocityPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
 
-
-	private String charsetName = "UTF-8";
+	private String charset = SwConstants.UTF_8;
 
 	private static VelocityContext velocityContext = null;
 
@@ -69,7 +69,7 @@ public class VelocityPropertyPlaceholderConfigurer extends PropertyPlaceholderCo
 	public void fillMergeProperties( Properties prop, InputStream input ) {
 		try {
 			StringWriter writer = new StringWriter();
-			BufferedReader br = new BufferedReader(new InputStreamReader(input, this.charsetName));
+			BufferedReader br = new BufferedReader(new InputStreamReader(input, getCharset()));
 			if ( velocityContext == null ) {
 				/*
 				 * 设置环境变量判断逻辑
@@ -113,13 +113,13 @@ public class VelocityPropertyPlaceholderConfigurer extends PropertyPlaceholderCo
 	}
 
 
-	public String getCharsetName() {
-		return charsetName;
+	public String getCharset() {
+		return charset;
 	}
 
 
-	public void setCharsetName( String charsetName ) {
-		this.charsetName = charsetName;
+	public void setCharset( String charset ) {
+		this.charset = charset;
 	}
 
 }
