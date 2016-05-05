@@ -25,7 +25,12 @@ import com.baomidou.framework.exception.SpringWindException;
  * <p>
  * Spring 工具类 ，获取Spring容器中的上下文信息
  * </p>
- * 
+ * <p>
+ *  使用的时候需要注入到 servlet-context.xml 如下设置：
+ *  <br>
+ *  <!-- 获取ApplicationContext上下文 -->
+ *	<bean id="springContextHolder" class="com.baomidou.framework.spring.SpringContextHolder" />
+ * </p>
  * @author hubin
  * @Date 2016-01-15
  */

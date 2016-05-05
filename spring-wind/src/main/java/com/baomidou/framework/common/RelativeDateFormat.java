@@ -39,7 +39,7 @@ public class RelativeDateFormat {
 
 	/**
 	 * <p>
-	 * 日期转换为 xx 前（例如：1小时前）
+	 * 日期格式为 xx 前（例如：1小时前）
 	 * </p>
 	 * 
 	 * @param date
