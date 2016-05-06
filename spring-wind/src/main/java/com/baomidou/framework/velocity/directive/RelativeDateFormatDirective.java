@@ -35,7 +35,7 @@ import com.baomidou.framework.velocity.AbstractDirective;
  * velocity 相对日期格式标签
  * </p>
  * <p>
- * 例如： #relativeDateFormat(传入格式日期) 【 输出：1小时前 】 
+ * 例如： #relativeDateFormat($!{testDate}) 【 输出：1小时前 】 
  * </p>
  * @author hubin
  * @Date 2016-05-05
