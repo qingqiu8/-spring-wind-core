@@ -38,9 +38,9 @@
 		<mybatis-plus.version>1.2.16</mybatis-plus.version>
 
 		<!-- kisso -->
-		<kisso.version>3.6.8</kisso.version>
+		<kisso.version>3.6.10</kisso.version>
 		<bcprov.version>1.50</bcprov.version>
-		<fastjson.version>1.2.10</fastjson.version>
+		<fastjson.version>1.2.11</fastjson.version>
 
 		<!-- provided -->
 		<servlet-api.version>2.5</servlet-api.version>
