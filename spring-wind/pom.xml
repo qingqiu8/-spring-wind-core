@@ -51,6 +51,7 @@
 		<pinyin4j.version>2.5.1</pinyin4j.version>
 		<sigar.version>1.6.4</sigar.version>
 		<im4java.version>1.4.0</im4java.version>
+		<scribejava-core.version>2.5.3</scribejava-core.version>
 	</properties>
 
 	<dependencies>
@@ -182,6 +183,15 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- GraphicsMagick-client end -->
+		
+		<!-- oauth2.0-login begin -->
+		<dependency>
+		    <groupId>com.github.scribejava</groupId>
+		    <artifactId>scribejava-core</artifactId>
+		    <version>${scribejava-core.version}</version>
+		    <scope>provided</scope>
+		</dependency>
+		<!-- oauth2.0-login end -->
 	</dependencies>
 
 	<profiles>
