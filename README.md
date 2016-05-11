@@ -21,7 +21,7 @@ SSM 架构核心库，带给您的只有惊喜！
 
 ![登录效果](http://git.oschina.net/uploads/images/2016/0423/181624_cd5f4706_12260.png "登录效果")
 
-![注册效果](http://git.oschina.net/uploads/images/2016/0423/181650_811b4427_12260.png "注册效果")
+![echarts演示效果](http://git.oschina.net/uploads/images/2016/0511/222846_6bbded27_12260.png "echarts演示效果")
 
 ![权限管理效果](http://git.oschina.net/uploads/images/2016/0423/182040_f9e11f03_12260.png "权限管理效果")
 
