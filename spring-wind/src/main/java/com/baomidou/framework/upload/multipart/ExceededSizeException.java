@@ -2,14 +2,14 @@
 // All rights reserved.  Use of this class is limited.
 // Please see the LICENSE for more information.
 
-package com.baomidou.framework.upload.cos.multipart;
+package com.baomidou.framework.upload.multipart;
 
 import java.io.IOException;
 
 /**
  * Thrown to indicate an upload exceeded the maximum size.
  *
- * @see com.baomidou.framework.upload.cos.multipart.MultipartParser
+ * @see com.baomidou.framework.upload.multipart.MultipartParser
  *
  * @author <b>Jason Hunter</b>, Copyright &#169; 2007
  * @version 1.0, 2007/04/11

@@ -18,7 +18,7 @@ package com.baomidou.framework.upload;
 import java.io.File;
 
 import com.baomidou.framework.common.Base58Helper;
-import com.baomidou.framework.upload.cos.multipart.FileRenamePolicy;
+import com.baomidou.framework.upload.multipart.FileRenamePolicy;
 
 /**  
  * <p>
@@ -28,7 +28,7 @@ import com.baomidou.framework.upload.cos.multipart.FileRenamePolicy;
  * @author hubin
  * @Date 2016-04-21
  */
-public class CosFileRenamePolicy implements FileRenamePolicy {
+public class UploadFileRenamePolicy implements FileRenamePolicy {
 
 	/* 后缀名 */
 	private String suffix;

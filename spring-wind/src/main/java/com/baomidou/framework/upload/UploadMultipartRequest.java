@@ -34,12 +34,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baomidou.framework.common.SwConstants;
-import com.baomidou.framework.upload.cos.multipart.FilePart;
-import com.baomidou.framework.upload.cos.multipart.FileRenamePolicy;
-import com.baomidou.framework.upload.cos.multipart.MacBinaryDecoderOutputStream;
-import com.baomidou.framework.upload.cos.multipart.MultipartParser;
-import com.baomidou.framework.upload.cos.multipart.ParamPart;
-import com.baomidou.framework.upload.cos.multipart.Part;
+import com.baomidou.framework.upload.multipart.FilePart;
+import com.baomidou.framework.upload.multipart.FileRenamePolicy;
+import com.baomidou.framework.upload.multipart.MacBinaryDecoderOutputStream;
+import com.baomidou.framework.upload.multipart.MultipartParser;
+import com.baomidou.framework.upload.multipart.ParamPart;
+import com.baomidou.framework.upload.multipart.Part;
 
 /**
  * <p>
@@ -49,9 +49,9 @@ import com.baomidou.framework.upload.cos.multipart.Part;
  * @author hubin
  * @Date 2016-04-21
  */
-public class CosMultipartRequest {
+public class UploadMultipartRequest {
 
-	protected Logger logger = LoggerFactory.getLogger(CosMultipartRequest.class);
+	protected Logger logger = LoggerFactory.getLogger(UploadMultipartRequest.class);
 
 	private static final int DEFAULT_MAX_POST_SIZE = 1024 * 1024; // 1 Meg
 
@@ -79,17 +79,17 @@ public class CosMultipartRequest {
 	private String charset = SwConstants.UTF_8;
 
 
-	protected CosMultipartRequest() {
+	protected UploadMultipartRequest() {
 		/* 保护 */
 	}
 
 
-	public CosMultipartRequest( HttpServletRequest request, String saveDirectory ) {
+	public UploadMultipartRequest( HttpServletRequest request, String saveDirectory ) {
 		this(request, saveDirectory, DEFAULT_MAX_POST_SIZE);
 	}
 
 
-	public CosMultipartRequest( HttpServletRequest request, String saveDirectory, int maxPostSize ) {
+	public UploadMultipartRequest( HttpServletRequest request, String saveDirectory, int maxPostSize ) {
 		this.request = request;
 		this.saveDirectory = saveDirectory;
 		this.maxPostSize = maxPostSize;
@@ -142,14 +142,14 @@ public class CosMultipartRequest {
 				if ( fileName != null ) {
 					//filePart.setRenamePolicy(policy); // null policy is OK
 					// The part actually contained a file
-					CosFile cfi = writeTo(dir, fileName, getFileRenamePolicy(), filePart);
+					UploadFile cfi = writeTo(dir, fileName, getFileRenamePolicy(), filePart);
 					cfi.setDir(dir.toString());
 					cfi.setOriginal(fileName);
 					cfi.setParamParts(paramParts);
 					files.put(name, cfi);
 				} else {
 					// The field did not contain a file
-					files.put(name, new CosFile());
+					files.put(name, new UploadFile());
 				}
 			} else if ( part.isParam() ) {
 				ParamPart paramPart = (ParamPart) part;
@@ -162,10 +162,10 @@ public class CosMultipartRequest {
 	/**
 	 * 输出文件
 	 */
-	private CosFile writeTo( File fileOrDirectory, String fileName, FileRenamePolicy policy, FilePart filePart )
+	private UploadFile writeTo( File fileOrDirectory, String fileName, FileRenamePolicy policy, FilePart filePart )
 		throws IOException {
 		OutputStream fileOut = null;
-		CosFile cf = new CosFile();
+		UploadFile cf = new UploadFile();
 		try {
 			// Only do something if this part contains a file
 			if ( fileName != null ) {
@@ -214,8 +214,8 @@ public class CosMultipartRequest {
 					file = fileOrDirectory;
 				}
 
-				if ( policy instanceof CosFileRenamePolicy ) {
-					((CosFileRenamePolicy) policy).setSuffix(cf.getSuffix());
+				if ( policy instanceof UploadFileRenamePolicy ) {
+					((UploadFileRenamePolicy) policy).setSuffix(cf.getSuffix());
 				}
 
 				if ( policy != null ) {
@@ -252,7 +252,7 @@ public class CosMultipartRequest {
 	private String readFileExt( byte[] data, String fileName ) throws Exception {
 		String fileExt = fileName.substring(fileName.lastIndexOf("."));
 		StringBuffer fe = new StringBuffer();
-		fe.append(CosFileHeader.bytesToHexString(data));
+		fe.append(UploadFileHeader.bytesToHexString(data));
 		fe.append(fileExt);
 		if ( fileHeaderExts.contains(fe.toString()) ) {
 			return fileExt;
@@ -277,12 +277,12 @@ public class CosMultipartRequest {
 	}
 
 
-	public CosMultipartRequest( ServletRequest request, String saveDirectory ) throws IOException {
+	public UploadMultipartRequest( ServletRequest request, String saveDirectory ) throws IOException {
 		this((HttpServletRequest) request, saveDirectory);
 	}
 
 
-	public CosMultipartRequest( ServletRequest request, String saveDirectory, int maxPostSize ) throws IOException {
+	public UploadMultipartRequest( ServletRequest request, String saveDirectory, int maxPostSize ) throws IOException {
 		this((HttpServletRequest) request, saveDirectory, maxPostSize);
 	}
 
@@ -293,10 +293,10 @@ public class CosMultipartRequest {
 	}
 
 
-	public CosFile getCosFile( String name ) {
+	public UploadFile getCosFile( String name ) {
 		try {
 			// may be null
-			return (CosFile) files.get(name);
+			return (UploadFile) files.get(name);
 		} catch ( Exception e ) {
 			return null;
 		}
@@ -315,7 +315,7 @@ public class CosMultipartRequest {
 
 	public FileRenamePolicy getFileRenamePolicy() {
 		if ( fileRenamePolicy == null ) {
-			return new CosFileRenamePolicy();
+			return new UploadFileRenamePolicy();
 		}
 		return fileRenamePolicy;
 	}

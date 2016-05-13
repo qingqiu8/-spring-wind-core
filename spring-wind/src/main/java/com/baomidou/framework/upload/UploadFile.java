@@ -26,7 +26,7 @@ import java.util.HashMap;
  * @author hubin
  * @Date 2016-04-21
  */
-public class CosFile {
+public class UploadFile {
 
 	/* 名称 */
 	private String filename;

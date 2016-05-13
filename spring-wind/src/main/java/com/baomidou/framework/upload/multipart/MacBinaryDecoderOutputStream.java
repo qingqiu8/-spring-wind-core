@@ -2,7 +2,7 @@
 // All rights reserved.  Use of this class is limited.
 // Please see the LICENSE for more information.
 
-package com.baomidou.framework.upload.cos.multipart;
+package com.baomidou.framework.upload.multipart;
 
 import java.io.FilterOutputStream;
 import java.io.IOException;

@@ -15,7 +15,7 @@
  */
 package com.baomidou.framework;
 
-import com.baomidou.framework.upload.CosFileHeader;
+import com.baomidou.framework.upload.UploadFileHeader;
 
 /**
  * <p>
@@ -28,7 +28,7 @@ import com.baomidou.framework.upload.CosFileHeader;
 public class CosFileHeaderTest {
 
 	public static void main( String[] args ) {
-		System.out.println(CosFileHeader.getThreeBytes("c:/kisso.pdf"));
+		System.out.println(UploadFileHeader.getThreeBytes("c:/kisso.pdf"));
 	}
 
 }

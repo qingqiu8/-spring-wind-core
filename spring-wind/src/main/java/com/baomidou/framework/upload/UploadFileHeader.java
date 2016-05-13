@@ -26,7 +26,7 @@ import java.io.IOException;
  * @author hubin
  * @Date 2016-04-21
  */
-public class CosFileHeader {
+public class UploadFileHeader {
 
 	/** 
 	 * <p>
