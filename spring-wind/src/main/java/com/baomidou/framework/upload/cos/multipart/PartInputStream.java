@@ -70,8 +70,9 @@ public class PartInputStream extends FilterInputStream {
 	 *                if an I/O error occurs.
 	 */
 	private void fill() throws IOException {
-		if (eof)
+		if (eof) {
 			return;
+		}
 
 		// as long as we are not just starting up
 		if (count > 0) {

@@ -1,5 +1,5 @@
 // Copyright (C) 2002 by Jason Hunter <jhunter_AT_acm_DOT_org>.
-// All rights reserved.  Use of this class is limited.
+// All rights reserved. Use of this class is limited.
 // Please see the LICENSE for more information.
 
 package com.baomidou.framework.upload.cos.multipart;
@@ -21,6 +21,6 @@ public interface FileRenamePolicy {
 	 *
 	 * @see FilePart#writeTo(File fileOrDirectory)
 	 */
-	public File rename(File f);
+	public File rename( File f );
 
 }

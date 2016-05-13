@@ -1,5 +1,5 @@
 // Copyright (C) 1999-2001 by Jason Hunter <jhunter_AT_acm_DOT_org>.
-// All rights reserved.  Use of this class is limited.
+// All rights reserved. Use of this class is limited.
 // Please see the LICENSE for more information.
 
 package com.baomidou.framework.upload.cos.multipart;
@@ -30,14 +30,16 @@ public class LimitedServletInputStream extends ServletInputStream {
 	/** number of bytes we have currently read */
 	private int totalRead = 0;
 
+
 	/**
 	 * Creates a <code>LimitedServletInputStream</code> with the specified
 	 * length limit that wraps the provided <code>ServletInputStream</code>.
 	 */
-	public LimitedServletInputStream(ServletInputStream in, int totalExpected) {
+	public LimitedServletInputStream( ServletInputStream in, int totalExpected ) {
 		this.in = in;
 		this.totalExpected = totalExpected;
 	}
+
 
 	/**
 	 * Implement length limitation on top of the <code>readLine</code> method of
@@ -55,18 +57,19 @@ public class LimitedServletInputStream extends ServletInputStream {
 	 * @exception IOException
 	 *                if an I/O error occurs.
 	 */
-	public int readLine(byte b[], int off, int len) throws IOException {
+	public int readLine( byte b[], int off, int len ) throws IOException {
 		int result, left = totalExpected - totalRead;
-		if (left <= 0) {
+		if ( left <= 0 ) {
 			return -1;
 		} else {
 			result = ((ServletInputStream) in).readLine(b, off, Math.min(left, len));
 		}
-		if (result > 0) {
+		if ( result > 0 ) {
 			totalRead += result;
 		}
 		return result;
 	}
+
 
 	/**
 	 * Implement length limitation on top of the <code>read</code> method of the
@@ -78,16 +81,17 @@ public class LimitedServletInputStream extends ServletInputStream {
 	 *                if an I/O error occurs.
 	 */
 	public int read() throws IOException {
-		if (totalRead >= totalExpected) {
+		if ( totalRead >= totalExpected ) {
 			return -1;
 		}
 
 		int result = in.read();
-		if (result != -1) {
+		if ( result != -1 ) {
 			totalRead++;
 		}
 		return result;
 	}
+
 
 	/**
 	 * Implement length limitation on top of the <code>read</code> method of the
@@ -104,14 +108,14 @@ public class LimitedServletInputStream extends ServletInputStream {
 	 * @exception IOException
 	 *                if an I/O error occurs.
 	 */
-	public int read(byte b[], int off, int len) throws IOException {
+	public int read( byte b[], int off, int len ) throws IOException {
 		int result, left = totalExpected - totalRead;
-		if (left <= 0) {
+		if ( left <= 0 ) {
 			return -1;
 		} else {
 			result = in.read(b, off, Math.min(left, len));
 		}
-		if (result > 0) {
+		if ( result > 0 ) {
 			totalRead += result;
 		}
 		return result;

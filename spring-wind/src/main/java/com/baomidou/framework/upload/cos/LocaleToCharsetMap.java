@@ -1,5 +1,5 @@
 // Copyright (C) 1998-2001 by Jason Hunter <jhunter_AT_acm_DOT_org>.
-// All rights reserved.  Use of this class is limited.
+// All rights reserved. Use of this class is limited.
 // Please see the LICENSE for more information.
 
 package com.baomidou.framework.upload.cos;
@@ -19,11 +19,11 @@ import java.util.Locale;
  */
 public class LocaleToCharsetMap {
 
-	private static Hashtable map;
+	private static Hashtable<String, String> map;
+
 
 	static {
-		map = new Hashtable();
-
+		map = new Hashtable<String, String>();
 		map.put("ar", "ISO-8859-6");
 		map.put("be", "ISO-8859-5");
 		map.put("bg", "ISO-8859-5");
@@ -63,8 +63,8 @@ public class LocaleToCharsetMap {
 		map.put("uk", "ISO-8859-5");
 		map.put("zh", "GB2312");
 		map.put("zh_TW", "Big5");
-
 	}
+
 
 	/**
 	 * Gets the preferred charset for the given locale, or null if the locale is
@@ -74,13 +74,14 @@ public class LocaleToCharsetMap {
 	 *            the locale
 	 * @return the preferred charset
 	 */
-	public static String getCharset(Locale loc) {
+	public static String getCharset( Locale loc ) {
 		String charset;
 
 		// Try for an full name match (may include country)
 		charset = (String) map.get(loc.toString());
-		if (charset != null)
+		if ( charset != null ) {
 			return charset;
+		}
 
 		// If a full name didn't match, try just the language
 		charset = (String) map.get(loc.getLanguage());
