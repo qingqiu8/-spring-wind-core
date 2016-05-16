@@ -44,7 +44,7 @@ import org.springframework.core.io.UrlResource;
  * 目的：便于使用"统一war包+三套properties配置文件"来实现布署切换.
  * 
  * @author jiazhang
- * 
+ * @Date 2016-05-16
  */
 public class SWPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
     private static final String PROPERTIES_SUFFX = ".properties";
