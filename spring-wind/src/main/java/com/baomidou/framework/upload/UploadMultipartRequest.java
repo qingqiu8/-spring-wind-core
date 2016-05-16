@@ -293,7 +293,7 @@ public class UploadMultipartRequest {
 	}
 
 
-	public UploadFile getCosFile( String name ) {
+	public UploadFile getUploadFile( String name ) {
 		try {
 			// may be null
 			return (UploadFile) files.get(name);
