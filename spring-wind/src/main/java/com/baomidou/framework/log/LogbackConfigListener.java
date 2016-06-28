@@ -38,7 +38,6 @@ import com.baomidou.framework.velocity.RunEnvironment;
 
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
-import ch.qos.logback.core.joran.spi.JoranException;
 
 /**
  * <p>
@@ -91,8 +90,8 @@ public class LogbackConfigListener implements ServletContextListener {
 		lc.reset();
 		try {
 			configurator.doConfigure(in);
-		} catch ( JoranException ex ) {
-			ex.printStackTrace();
+		} catch ( Exception e ) {
+			throw new SpringWindException(e);
 		}
 		lc.start();
 	}

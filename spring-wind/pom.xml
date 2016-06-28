@@ -88,11 +88,6 @@
 			<version>${aspectjweaver.version}</version>
 		</dependency>
 		<!-- spring end -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
 
 		<!-- kisso begin -->
 		<dependency>
@@ -111,6 +106,7 @@
 			<version>${fastjson.version}</version>
 		</dependency>
 		<!-- kisso end -->
+
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus</artifactId>
@@ -128,6 +124,21 @@
 			<version>${mail.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- log begin -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback-classic.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- log end -->
+
 		<!-- velocity begin -->
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
@@ -142,7 +153,7 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- velocity end -->
-		
+
 		<!-- scheduler begin -->
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
@@ -193,15 +204,6 @@
 		    <scope>provided</scope>
 		</dependency>
 		<!-- oauth2.0-login end -->
-		
-		<!-- log begin -->
-		<dependency>
-		    <groupId>ch.qos.logback</groupId>
-		    <artifactId>logback-classic</artifactId>
-			<version>${logback-classic.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- log end -->
 	</dependencies>
 
 	<profiles>
