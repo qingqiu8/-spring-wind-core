@@ -52,6 +52,7 @@
 		<sigar.version>1.6.4</sigar.version>
 		<im4java.version>1.4.0</im4java.version>
 		<scribejava-core.version>2.5.3</scribejava-core.version>
+		<logback-classic.version>1.1.7</logback-classic.version>
 	</properties>
 
 	<dependencies>
@@ -192,6 +193,15 @@
 		    <scope>provided</scope>
 		</dependency>
 		<!-- oauth2.0-login end -->
+		
+		<!-- log begin -->
+		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-classic</artifactId>
+			<version>${logback-classic.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- log end -->
 	</dependencies>
 
 	<profiles>
