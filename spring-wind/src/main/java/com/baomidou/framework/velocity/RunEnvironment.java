@@ -36,7 +36,7 @@ public class RunEnvironment {
 	/**
 	 * 运行环境配置变量名
 	 */
-	private String configEnv = "sysRunmode";
+	private String configEnv = "spring_runmode";
 
 	private static String RUN_MODE = null;
 
@@ -44,8 +44,8 @@ public class RunEnvironment {
 	/**
 	 * 获取当前运行模式，默认 DEV 开发模式。
 	 * <p>
-	 * 首先环境变量中获取，变量名：sysRunmode 变量值：dev <br>
-	 * 如果不存在 JVM -D选项 参数中获取，例如：-DsysRunmode=dev <br>
+	 * 首先环境变量中获取，变量名：spring_runmode 变量值：dev <br>
+	 * 如果不存在 JVM -D选项 参数中获取，例如：-Dspring_runmode=dev <br>
 	 * </p>
 	 */
 	public String getRunMode() {
@@ -71,7 +71,7 @@ public class RunEnvironment {
 					mode = DEV;
 				}
 			}
-			System.err.println("-DsysRunmode=" + mode);
+			System.err.println("-Dspring_runmode=" + mode);
 			RUN_MODE = mode;
 		}
 		return RUN_MODE;
