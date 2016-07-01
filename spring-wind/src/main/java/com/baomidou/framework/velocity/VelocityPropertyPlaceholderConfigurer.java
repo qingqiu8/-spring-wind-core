@@ -27,8 +27,13 @@ import java.util.Properties;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.core.io.Resource;
+import org.springframework.util.PropertyPlaceholderHelper;
+import org.springframework.util.PropertyPlaceholderHelper.PlaceholderResolver;
+import org.springframework.util.StringValueResolver;
 
 import com.baomidou.framework.common.SwConstants;
 import com.baomidou.framework.exception.SpringWindException;
@@ -53,6 +58,9 @@ public class VelocityPropertyPlaceholderConfigurer extends PropertyPlaceholderCo
 
 	private RunEnvironment runEnvironment;
 
+	/* 处理未找到占位内容 */
+	private String placeholderValue = "";
+
 
 	@Override
 	public void setLocation( Resource location ) {
@@ -63,6 +71,56 @@ public class VelocityPropertyPlaceholderConfigurer extends PropertyPlaceholderCo
 	@Override
 	public void setLocations( Resource... locations ) {
 		this.locations = locations;
+	}
+
+
+	@Override
+	protected void processProperties( ConfigurableListableBeanFactory beanFactoryToProcess, Properties props )
+		throws BeansException {
+		StringValueResolver valueResolver = new PlaceholderResolvingStringValueResolver(props);
+		doProcessProperties(beanFactoryToProcess, valueResolver);
+	}
+
+	private class PlaceholderResolvingStringValueResolver implements StringValueResolver {
+
+		private final PropertyPlaceholderHelper helper;
+
+		private final PlaceholderResolver resolver;
+
+
+		public PlaceholderResolvingStringValueResolver( Properties props ) {
+			this.helper = new PropertyPlaceholderHelper(placeholderPrefix, placeholderSuffix, valueSeparator,
+					ignoreUnresolvablePlaceholders);
+			this.resolver = new PropertyPlaceholderConfigurerResolver(props);
+		}
+
+
+		@Override
+		public String resolveStringValue( String strVal ) throws BeansException {
+			String value = this.helper.replacePlaceholders(strVal, this.resolver);
+			if ( value.contains(placeholderPrefix) && value.equals(strVal) ) {
+				return placeholderValue;
+			}
+			return (value.equals(nullValue) ? null : value);
+		}
+	}
+
+
+	private class PropertyPlaceholderConfigurerResolver implements PlaceholderResolver {
+
+		private final Properties props;
+
+
+		private PropertyPlaceholderConfigurerResolver( Properties props ) {
+			this.props = props;
+		}
+
+
+		@Override
+		public String resolvePlaceholder( String placeholderName ) {
+			return VelocityPropertyPlaceholderConfigurer.this.resolvePlaceholder(placeholderName, props,
+				SYSTEM_PROPERTIES_MODE_FALLBACK);
+		}
 	}
 
 
@@ -120,6 +178,16 @@ public class VelocityPropertyPlaceholderConfigurer extends PropertyPlaceholderCo
 
 	public void setCharset( String charset ) {
 		this.charset = charset;
+	}
+
+
+	public String getPlaceholderValue() {
+		return placeholderValue;
+	}
+
+
+	public void setPlaceholderValue( String placeholderValue ) {
+		this.placeholderValue = placeholderValue;
 	}
 
 }
