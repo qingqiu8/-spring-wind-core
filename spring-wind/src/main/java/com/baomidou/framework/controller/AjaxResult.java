@@ -40,50 +40,41 @@ public class AjaxResult {
 	 */
 	private Object data;
 
-
-	public AjaxResult( boolean success, String message ) {
-		this(success, message, null);
-	}
-
-
-	public AjaxResult( Object data ) {
+	public AjaxResult(Object data) {
 		this(true, null, data);
 	}
 
+	public AjaxResult(boolean success, String message) {
+		this(success, message, null);
+	}
 
-	public AjaxResult( boolean success, String message, Object data ) {
+	public AjaxResult(boolean success, String message, Object data) {
 		this.success = success;
 		this.message = message;
 		this.data = data;
 	}
 
-
 	public String getMessage() {
 		return message;
 	}
 
-
-	public void setMessage( String message ) {
+	public void setMessage(String message) {
 		this.message = message;
 	}
-
 
 	public Object getData() {
 		return data;
 	}
 
-
-	public void setData( Object data ) {
+	public void setData(Object data) {
 		this.data = data;
 	}
-
 
 	public boolean isSuccess() {
 		return success;
 	}
 
-
-	public void setSuccess( boolean success ) {
+	public void setSuccess(boolean success) {
 		this.success = success;
 	}
 
