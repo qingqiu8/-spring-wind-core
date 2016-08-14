@@ -71,7 +71,7 @@ public class SpringScanPackage {
 
 	/**
 	 * <p>
-	 * 根据扫描包的,查询下面的所有类
+	 * 根据扫描包的路径,查询下面的所有类
 	 * </p>
 	 *
 	 * @param scanPackages
