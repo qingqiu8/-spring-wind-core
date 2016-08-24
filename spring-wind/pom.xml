@@ -35,7 +35,7 @@
 		<spring.version>4.2.5.RELEASE</spring.version>
 		<aspectjweaver.version>1.8.9</aspectjweaver.version>
 		<slf4j.version>1.7.21</slf4j.version>
-		<mybatis-plus.version>1.4.1</mybatis-plus.version>
+		<mybatis-plus.version>1.4.3</mybatis-plus.version>
 
 		<!-- kisso -->
 		<kisso.version>3.6.11</kisso.version>
